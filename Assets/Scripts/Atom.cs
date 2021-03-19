@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Atom : MonoBehaviour
+// Class that defines properties for elements
+public class Element : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Defines Name of atom and the kJValues for the colorSet that the element emits
+    public string Name;
+    public List<List<int>> kJValues;
+    public List<string> colorSet;
+    
+    // Defines the Element Object
+    public Element(string name, List<List<int>> kJ, List<string> colors)
     {
-        
+        Name = name;
+        kJValues = kJ;
+        colorSet = colors;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
