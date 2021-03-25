@@ -7,12 +7,20 @@ public class initializeScreen : MonoBehaviour
     public Element Hydrogen;
     public List<GameObject> levels;
     public List<Material> boxColors;
+    public Element chosenElement;
 
     // Start is called before the first frame update
     void Start()
     {
         Hydrogen = new Element("Hydrogen", new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<string> { "Violet", "Cyan", "Red" });
+        chooseElement(Hydrogen);
         initScreen();
+ 
+    }
+
+    public void chooseElement(Element element)
+    {
+        chosenElement = element;
     }
 
     public void initScreen()
@@ -30,10 +38,10 @@ public class initializeScreen : MonoBehaviour
             
         }
 
-        foreach (float i in Hydrogen.kJValues)
+        foreach (float i in chosenElement.kJValues)
         {
-            Debug.Log(Hydrogen.kJValues.IndexOf(i));
-            levels[Hydrogen.kJValues.IndexOf(i)].transform.position = new Vector3(3.41f, i - 2.91f, 0);
+            Debug.Log(chosenElement.kJValues.IndexOf(i));
+            levels[chosenElement.kJValues.IndexOf(i)].transform.position = new Vector3(3.41f, i - 2.91f, 0);
         }
        
     }
