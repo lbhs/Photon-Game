@@ -11,7 +11,7 @@ public class initializeScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Hydrogen = new Element("Hydrogen", new List<int> { 984, 1166, 1230, 1260, 1275 }, new List<string> { "Violet", "Cyan", "Red" });
+        Hydrogen = new Element("Hydrogen", new List<int> { 0, 984, 1166, 1230, 1260, 1275 }, new List<string> { "Violet", "Cyan", "Red" });
         initScreen();
     }
 
