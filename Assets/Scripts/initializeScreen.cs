@@ -11,7 +11,7 @@ public class initializeScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Hydrogen = new Element("Hydrogen", new List<int> { 0, 984, 1166, 1230, 1260, 1275 }, new List<string> { "Violet", "Cyan", "Red" });
+        Hydrogen = new Element("Hydrogen", new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<string> { "Violet", "Cyan", "Red" });
         initScreen();
     }
 
@@ -28,6 +28,12 @@ public class initializeScreen : MonoBehaviour
 
             }
             
+        }
+
+        foreach (float i in Hydrogen.kJValues)
+        {
+            Debug.Log(Hydrogen.kJValues.IndexOf(i));
+            levels[Hydrogen.kJValues.IndexOf(i)].transform.position = new Vector3(3.41f, i - 2.91f, 0);
         }
        
     }
