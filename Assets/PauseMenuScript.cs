@@ -15,8 +15,9 @@ public class PauseMenuScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKey(KeyCode.Escape))
         {
+            Debug.Log("esc key pressed");
             if (isPaused)
             {
                 Resume();
