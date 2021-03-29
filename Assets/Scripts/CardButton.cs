@@ -6,21 +6,11 @@ public class CardButton : MonoBehaviour
 {
 
     public List<GameObject> Cards;
-    public void FlipCard()
+   
+    public void FlipFirstCard()
     {
-        this.GetComponent<Animation>().Play("yuhh");
-        Card.removeAt(0);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        var FirstCard = Cards[0];
+        FirstCard.GetComponent<Animation>().Play("yuhh");
+        Cards.Remove(FirstCard);
     }
 }
