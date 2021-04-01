@@ -10,7 +10,10 @@ public class CardButton : MonoBehaviour
     public void FlipFirstCard()
     {
         var FirstCard = Cards[0];
-        FirstCard.GetComponent<Animation>().Play("yuhh");
+        var transform = FirstCard.transform;
+        var Child = transform.GetChild(0);
+        Debug.Log(Child);
+        Child.GetComponent<PlayAnimation>().playAnimation;
         Cards.Remove(FirstCard);
     }
 }
