@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class colorPusherUpper : MonoBehaviour
 {
-    public lineEnergyLevels
     // Start is called before the first frame update
     void Start()
     {
