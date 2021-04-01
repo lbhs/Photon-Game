@@ -6,6 +6,8 @@ public class lineTelaportation : MonoBehaviour
 {
     public List<GameObject> Lines;
     public GameObject electron;
+    public List<GameObject> lineLabels;
+    public Camera cam;
 
 
     // Start is called before the first frame update
@@ -17,6 +19,18 @@ public class lineTelaportation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach(GameObject Line in Lines)
+        {
+ 
+            var pos = new Vector3(Line.transform.position.x + 0, Line.transform.position.y + 0, Line.transform.position.z);
+            var newpos = cam.WorldToScreenPoint(pos);
+            var index = Lines.IndexOf(Line);
+            var text = lineLabels[index];
+            text.transform.position = newpos;
+        }
+        
+
+
         if(Input.GetMouseButtonDown(0))
         {
             UnityEngine.Debug.Log("pressed");
