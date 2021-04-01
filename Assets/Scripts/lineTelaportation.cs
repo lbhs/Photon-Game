@@ -29,6 +29,15 @@ public class lineTelaportation : MonoBehaviour
                 UnityEngine.Debug.Log("hit");
                 if (Lines.Contains(hit.collider.gameObject))
                 {
+                    Vector3 lastPos = electron.transform.position;
+                    Vector3 newPos = hit.collider.gameObject.transform.position;
+                    
+
+                    if (lastPos.y > newPos.y)
+                    {
+                        Debug.Log(lastPos.y - newPos.y);
+                    }
+
                     electron.transform.position = hit.collider.gameObject.transform.position;
                 }
             }
