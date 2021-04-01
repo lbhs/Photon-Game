@@ -12,7 +12,7 @@ public class initializeScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Hydrogen = new Element("Hydrogen", new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<String> { "Violet", "Cyan", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f });
+        Hydrogen = new Element("Hydrogen",  new List<string> { "Violet", "Cyan", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f });
         chooseElement(Hydrogen);
         initScreen();
  
@@ -30,7 +30,7 @@ public class initializeScreen : MonoBehaviour
         foreach (Material i in boxColors)
         {
 
-            if (Hydrogen.colorSet.Contains(i.name) == true) {
+            if (Hydrogen.colors.Contains(i.name) == true) {
 
                 colorsUsed.Add(i);
 
