@@ -1176,8 +1176,8 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 1, a: 0}
   Completed: []
   Combinations: []
-  kJvalues0: 9e000000be000000c9000000d2000000ee000000f500000008010000
-  kJvalues1: be000000c9000000d2000000ee000000f50000000801000038010000
+  kJvalues0: 
+  kJvalues1: 
 --- !u!4 &624523952 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 944207635432871677, guid: ded78c464788438408bdf3a049e3b2f3,
