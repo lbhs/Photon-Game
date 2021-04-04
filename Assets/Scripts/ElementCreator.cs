@@ -14,20 +14,33 @@ public class ElementCreator : MonoBehaviour
 
     IEnumerator CreateElement()
     {
-        while (Completed.Count < 3)
-        {
-            var x1 = Random.Range(0, 313);
-            var x2 = Random.Range(0, 313);
-            var x3 = Random.Range(0, 313);
-            if (CheckNumbers(x1, x2, x3))
+  //      while (Completed.Count < 3)
+ //       {
+        //    var x1 = Random.Range(0, 313);
+        //    var x2 = Random.Range(0, x1);
+         //   var x3 = Random.Range(0, x2);
+            for (int x1 = 245; x1 < 313; x1++)
             {
-                print("Found Element");
+                for (int x2 = 0; x2 < x1; x2++)
+                {
+                    for (int x3 = 0; x3 < x2; x3++)
+                    {
+                        if (CheckNumbers(x1, x2, x3))
+                        {
+                            print("Found Element");
+          //                  StopCoroutine("CreateElement");
+                        }
+                        else
+                        {
+                            print(x1 + ", " + x2 + ", " + x3);
+                            yield return new WaitForSeconds(0.01f);
+                        }
+                    }
+                }
             }
-            else
-            {
-                print(x1 + ", " + x2 + ", " + x3);
-            }
-        }
+            
+
+//        }
         yield return new WaitForSeconds(0.0f);
     }
 
@@ -91,8 +104,12 @@ public class ElementCreator : MonoBehaviour
                         Combinations.Add("x1 + x2 + x3");
                     }
                 }
+                else
+                {
+                    break;
+                }
         }
-        if (Completed.Count == 3)
+        if (Completed.Count > 3)
         {
             print(x1 + ", " + x2 + ", " + x3 + "\n" + Combinations[0] + ", " + Completed[0] + "\n" + Combinations[1] + ", " + Completed[1] + "\n" + Combinations[2] + ", " + Completed[2]);
             return true;
