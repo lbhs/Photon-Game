@@ -6,6 +6,8 @@ public class lineTelaportation : MonoBehaviour
 {
     public List<GameObject> Lines;
     public GameObject electron;
+    public List<GameObject> lineLabels;
+    public Camera cam;
 
 
     // Start is called before the first frame update
@@ -17,6 +19,18 @@ public class lineTelaportation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        foreach(GameObject Line in Lines)
+        {
+ 
+            var pos = new Vector3(Line.transform.position.x + 0, Line.transform.position.y + 0, Line.transform.position.z);
+            var newpos = cam.WorldToScreenPoint(pos);
+            var index = Lines.IndexOf(Line);
+            var text = lineLabels[index];
+            text.transform.position = newpos;
+        }
+        
+
+
         if(Input.GetMouseButtonDown(0))
         {
             UnityEngine.Debug.Log("pressed");
@@ -31,11 +45,49 @@ public class lineTelaportation : MonoBehaviour
                 {
                     Vector3 lastPos = electron.transform.position;
                     Vector3 newPos = hit.collider.gameObject.transform.position;
-                    
+
 
                     if (lastPos.y > newPos.y)
                     {
-                        Debug.Log(lastPos.y - newPos.y);
+                        Debug.Log((int)((lastPos.y + 2.91f) * 160f - (newPos.y + 2.91) * 160));
+                        var kJDifference = ((int)((lastPos.y + 2.91f) * 160f - (newPos.y + 2.91) * 160));
+
+                        if (kJDifference >= 158 && kJDifference <= 190)
+                        {
+                            Debug.Log("Red");
+                        }
+                        if (kJDifference >= 191 && kJDifference <= 201)
+                        {
+                            Debug.Log("Orange");
+                        }
+                        if (kJDifference >= 202 && kJDifference <= 210)
+                        {
+                            Debug.Log("Yellow");
+                        }
+                        if (kJDifference >= 211 && kJDifference <= 238)
+                        {
+                            Debug.Log("Green");
+                        }
+                        if (kJDifference >= 239 && kJDifference <= 245)
+                        {
+                            Debug.Log("Cyan");
+                        }
+                        if (kJDifference >= 246 && kJDifference <= 264)
+                        {
+                            Debug.Log("Blue");
+                        }
+                        if (kJDifference >= 265 && kJDifference <= 312)
+                        {
+                            Debug.Log("Violet");
+                        }
+                        if (kJDifference > 312)
+                        {
+                            Debug.Log("Ultraviolet");
+                        }
+                        if (kJDifference < 158)
+                        {
+                            Debug.Log("Infrared");
+                        }
                     }
 
                     electron.transform.position = hit.collider.gameObject.transform.position;
