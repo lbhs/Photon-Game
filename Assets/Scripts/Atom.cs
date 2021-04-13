@@ -6,16 +6,18 @@ using UnityEngine;
 public class Element : MonoBehaviour
 {
     // Defines Name of atom and the kJValues for the colorSet that the element emits
-    public string Name;
-    public List<float> kJValues;
-    public List<string> colorSet;
-    
+    public string name;
+    public List<string> colors;
+    public List<float> linePositions;
+    public List<int> kJValues;
+
     // Defines the Element Object
-    public Element(string name, List<float> kJ, List<string> colors)
+    public Element(string Name, List<string> colorSet, List<float> lines, List<int> kJ)
     {
-        Name = name;
+        name = Name;
+        linePositions = lines;
         kJValues = kJ;
-        colorSet = colors;
+        colors = colorSet;
     }
 
 }
