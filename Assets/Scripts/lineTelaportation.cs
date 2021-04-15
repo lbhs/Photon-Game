@@ -8,7 +8,13 @@ public class lineTelaportation : MonoBehaviour
     public GameObject electron;
     public List<GameObject> lineLabels;
     public Camera cam;
-
+    public GameObject Red;
+    public GameObject Orange;
+    public GameObject Yellow;
+    public GameObject Green;
+    public GameObject Blue;
+    public GameObject Indigo;
+    public GameObject Violet;
 
     // Start is called before the first frame update
     void Start()
@@ -55,38 +61,47 @@ public class lineTelaportation : MonoBehaviour
                         if (kJDifference >= 158 && kJDifference <= 190)
                         {
                             Debug.Log("Red");
+                            Red.SetActive(true);
                         }
                         if (kJDifference >= 191 && kJDifference <= 201)
                         {
                             Debug.Log("Orange");
+                            Orange.SetActive(true);
                         }
                         if (kJDifference >= 202 && kJDifference <= 210)
                         {
                             Debug.Log("Yellow");
+                            Yellow.SetActive(true);
                         }
                         if (kJDifference >= 211 && kJDifference <= 238)
                         {
                             Debug.Log("Green");
+                            Green.SetActive(true);
                         }
                         if (kJDifference >= 239 && kJDifference <= 245)
                         {
                             Debug.Log("Cyan");
+                            Blue.SetActive(true);
                         }
                         if (kJDifference >= 246 && kJDifference <= 264)
                         {
                             Debug.Log("Blue");
+                            Indigo.SetActive(true);
                         }
                         if (kJDifference >= 265 && kJDifference <= 312)
                         {
                             Debug.Log("Violet");
+                            Violet.SetActive(true);
                         }
                         if (kJDifference > 312)
                         {
                             Debug.Log("Ultraviolet");
+                            
                         }
                         if (kJDifference < 158)
                         {
                             Debug.Log("Infrared");
+                            
                         }
                     }
 
