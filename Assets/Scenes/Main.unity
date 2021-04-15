@@ -1807,6 +1807,13 @@ MonoBehaviour:
   - {fileID: 1629869637}
   - {fileID: 351012101}
   cam: {fileID: 483147730}
+  Red: {fileID: 1972736409}
+  Orange: {fileID: 1851243011}
+  Yellow: {fileID: 1377266111}
+  Green: {fileID: 1396697732}
+  Blue: {fileID: 337235826}
+  Indigo: {fileID: 897650073}
+  Violet: {fileID: 1713017294}
 --- !u!4 &1119936858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8551778431804015759, guid: 5ce8e8668db785547b8b16e4be64f312,
