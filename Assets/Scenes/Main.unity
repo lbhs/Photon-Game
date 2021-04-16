@@ -1814,6 +1814,7 @@ MonoBehaviour:
   Blue: {fileID: 337235826}
   Indigo: {fileID: 897650073}
   Violet: {fileID: 1713017294}
+  CardManager: {fileID: 1570739005}
 --- !u!4 &1119936858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8551778431804015759, guid: 5ce8e8668db785547b8b16e4be64f312,
@@ -2347,6 +2348,7 @@ MonoBehaviour:
   - {fileID: 1463496304}
   - {fileID: 377828181}
   - {fileID: 734940022}
+  FlippedCards: []
 --- !u!1 &1596559637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549,
