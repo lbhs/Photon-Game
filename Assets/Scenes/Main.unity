@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2290,7 +2290,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570739007}
-  - component: {fileID: 1570739006}
   - component: {fileID: 1570739008}
   m_Layer: 0
   m_Name: CardManager
@@ -2299,30 +2298,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1570739006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570739005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff7d5fa0e55341fc8e5d8996893a85b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cards:
-  - {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549, type: 3}
-  - {fileID: 8564134748008974064, guid: 5b7b0c8f5b2ae5b408f913daba4fbce1, type: 3}
-  - {fileID: 944207635432871678, guid: ded78c464788438408bdf3a049e3b2f3, type: 3}
-  - {fileID: 3550220156776139053, guid: cd35bebb5b75aa94e89153118ddad814, type: 3}
-  - {fileID: 2670633073016323923, guid: 47c3a7ed72437a846b60b74f8b5d6781, type: 3}
-  - {fileID: 8551778431804015756, guid: 5ce8e8668db785547b8b16e4be64f312, type: 3}
-  - {fileID: 7671340915468949657, guid: 01aa1beaff5775e42800865cf3116f7a, type: 3}
-  - {fileID: 8920848182066185860, guid: 68a7dece782551c4e894ca8594fe893a, type: 3}
-  - {fileID: 3374190192505162390, guid: 384b47759e135d54e938161bd3037338, type: 3}
-  - {fileID: 6307849885966577000, guid: 7023d3bfb09d4b7428f2f5380da2ea08, type: 3}
-  - {fileID: 4482131653121754264, guid: b5a728e4062c39842bb215d3172db45f, type: 3}
 --- !u!4 &1570739007
 Transform:
   m_ObjectHideFlags: 0

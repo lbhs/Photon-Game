@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class lineTelaportation : MonoBehaviour
+public class LineManager : MonoBehaviour
 {
     public List<GameObject> Lines;
     public GameObject electron;
@@ -15,19 +15,12 @@ public class lineTelaportation : MonoBehaviour
     public GameObject Blue;
     public GameObject Indigo;
     public GameObject Violet;
+    public GameObject CardManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         foreach(GameObject Line in Lines)
         {
- 
             var pos = new Vector3(Line.transform.position.x + 0, Line.transform.position.y + 0, Line.transform.position.z);
             var newpos = cam.WorldToScreenPoint(pos);
             var index = Lines.IndexOf(Line);
@@ -35,14 +28,10 @@ public class lineTelaportation : MonoBehaviour
             text.transform.position = newpos;
         }
         
-
-
         if(Input.GetMouseButtonDown(0))
         {
-            UnityEngine.Debug.Log("pressed");
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-          //  int layerMask = 1 << 8;
 
             if(Physics.Raycast(ray, out hit, 1000))
             {
@@ -51,6 +40,11 @@ public class lineTelaportation : MonoBehaviour
                 {
                     Vector3 lastPos = electron.transform.position;
                     Vector3 newPos = hit.collider.gameObject.transform.position;
+
+                    if (CheckLine(lastPos, newPos, hit.collider.gameObject.name))
+                    {
+                        electron.transform.position = hit.collider.gameObject.transform.position;
+                    }
 
 
                     if (lastPos.y > newPos.y)
@@ -105,9 +99,42 @@ public class lineTelaportation : MonoBehaviour
                         }
                     }
 
-                    electron.transform.position = hit.collider.gameObject.transform.position;
+                    
                 }
             }
+        }
+    }
+
+    public bool CheckLine(Vector3 lastPos, Vector3 newPos, string linename)
+    {
+        bool checkd = false;
+        var CardNumber = CardManager.GetComponent<CardThing>().CheckCardNumber();
+        int LineNumber;
+        int.TryParse(linename, out LineNumber);
+        var kJDifference = ((int)((newPos.y + 2.91) * 160 - (lastPos.y + 2.91f) * 160f));
+        switch (CardNumber)
+        {
+            case 1:
+                if(kJDifference <= 630)
+                {
+                    checkd = true;
+                }
+                break;
+            case 2:
+                if (LineNumber == 3)
+                {
+                    checkd = true;
+                }
+                break;
+        }
+
+        if (checkd)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
