@@ -2953,7 +2953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982a9e9ec4fa62c4d99a352f42372e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hydrogen: {fileID: 0}
+  element: {fileID: 0}
   levels:
   - {fileID: 424219976}
   - {fileID: 1977851095}
@@ -2970,6 +2970,10 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b755d903e3f79d847881b870c2ea341f, type: 2}
   - {fileID: 2100000, guid: 8a95b34977fc0f74490bdcaed2bf2a0d, type: 2}
   chosenElement: {fileID: 0}
+  Lines: []
+  cam: {fileID: 0}
+  lineLabels: []
+  Hydrogen: {fileID: 0}
 --- !u!4 &1830344515
 Transform:
   m_ObjectHideFlags: 0
