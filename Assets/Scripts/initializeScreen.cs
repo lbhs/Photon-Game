@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class initializeScreen : MonoBehaviour
 {
-    public Element Hydrogen;
+    public Element element;
     public List<GameObject> levels;
     public List<Material> boxColors;
     public Element chosenElement;
     public List<GameObject> Lines;
     public Camera cam;
     public List<GameObject> lineLabels;
-
+    public GameObject dropDown;
+    public Element Hydrogen;
+    
     // Start is called before the first frame update
     void Start()
     {
-        Hydrogen = new Element("Hydrogen",  new List<string> { "Violet", "Cyan", "Blue", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<int> { 0, 980, 1161, 1224, 1254, 1269 });
+        Element Hydrogen = new Element("Hydrogen", new List<string> { "Violet", "Cyan", "Blue", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<int> { 0, 980, 1161, 1224, 1254, 1269 });
         chooseElement(Hydrogen);
         initScreen();
  
@@ -29,17 +31,6 @@ public class initializeScreen : MonoBehaviour
     public void initScreen()
     {
         List<Material> colorsUsed = new List<Material>();
-
-        foreach (Material i in boxColors)
-        {
-
-            if (Hydrogen.colors.Contains(i.name) == true) {
-
-                colorsUsed.Add(i);
-
-            }
-            
-        }
 
         foreach (float i in chosenElement.linePositions)
         {

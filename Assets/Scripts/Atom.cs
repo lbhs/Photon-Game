@@ -10,6 +10,8 @@ public class Element : MonoBehaviour
     public List<string> colors;
     public List<float> linePositions;
     public List<int> kJValues;
+    
+
 
     // Defines the Element Object
     public Element(string Name, List<string> colorSet, List<float> lines, List<int> kJ)
@@ -18,7 +20,9 @@ public class Element : MonoBehaviour
         linePositions = lines;
         kJValues = kJ;
         colors = colorSet;
+
     }
 
+    
 }
 
