@@ -35,17 +35,12 @@ public class LineManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, 1000))
             {
-                UnityEngine.Debug.Log("hit");
-                if (Lines.Contains(hit.collider.gameObject))
+                if (Lines.Contains(hit.collider.gameObject) && CardManager.GetComponent<CardThing>().EligibleLines.Contains(hit.collider.gameObject))
                 {
                     Vector3 lastPos = electron.transform.position;
                     Vector3 newPos = hit.collider.gameObject.transform.position;
-
-                    if (CheckLine(lastPos, newPos, hit.collider.gameObject.name))
-                    {
-                        electron.transform.position = hit.collider.gameObject.transform.position;
-                    }
-
+                    UnityEngine.Debug.Log("checked");
+                    electron.transform.position = hit.collider.gameObject.transform.position;
 
                     if (lastPos.y > newPos.y)
                     {
@@ -105,36 +100,40 @@ public class LineManager : MonoBehaviour
         }
     }
 
-    public bool CheckLine(Vector3 lastPos, Vector3 newPos, string linename)
+    public List<GameObject> CheckLines(GameObject Card)
     {
-        bool checkd = false;
-        var CardNumber = CardManager.GetComponent<CardThing>().CheckCardNumber();
-        int LineNumber;
-        int.TryParse(linename, out LineNumber);
-        var kJDifference = ((int)((newPos.y + 2.91) * 160 - (lastPos.y + 2.91f) * 160f));
-        switch (CardNumber)
+        var electronpos = electron.transform.position;
+        List<GameObject> ReturnLines = new List<GameObject>();
+        int CardNumber;
+        int.TryParse(Card.name, out CardNumber);
+        foreach (GameObject line in Lines)
         {
-            case 1:
-                if(kJDifference <= 630)
-                {
-                    checkd = true;
-                }
-                break;
-            case 2:
-                if (LineNumber == 3)
-                {
-                    checkd = true;
-                }
-                break;
+            bool Checkd = false;
+            var kJDifference = ((int)((line.transform.position.y + 2.91) * 160 - (electronpos.y + 2.91f) * 160f));
+            int LineNumber;
+            int.TryParse(line.name, out LineNumber);
+            switch (CardNumber)
+            {
+                case 0:
+                    if (kJDifference <= 630 && kJDifference > 0)
+                    {
+                        Checkd = true;
+                    }
+                    break;
+                case 1:
+                    if (LineNumber == 3)
+                    {
+                        Checkd = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            if (Checkd)
+            {
+                ReturnLines.Add(line);
+            }
         }
-
-        if (checkd)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return ReturnLines;
     }
 }

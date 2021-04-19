@@ -7,6 +7,8 @@ public class CardThing : MonoBehaviour
 {
     public List<GameObject> Cards;
     public List<GameObject> FlippedCards;
+    public GameObject LineManager;
+    public List<GameObject> EligibleLines;
 
     public void FlipFirstCard()
     {
@@ -16,14 +18,6 @@ public class CardThing : MonoBehaviour
         var pos = FirstCard.transform.position;
         FirstCard.transform.position = new Vector3(pos.x, pos.y, 0 - pos.z);
         Cards.Remove(FirstCard);
-        FlippedCards.Add(FirstCard);
-    }
-
-    public int CheckCardNumber()
-    {
-        int number;
-        string name = FlippedCards.Last().name;
-        int.TryParse(name, out number);
-        return number;
+        EligibleLines = LineManager.GetComponent<LineManager>().CheckLines(FirstCard);
     }
 }
