@@ -16,7 +16,13 @@ public class LineManager : MonoBehaviour
     public GameObject Indigo;
     public GameObject Violet;
     public GameObject CardManager;
+    public initializeScreen init;
+    public int CurrentLineNumber;
 
+    void Start()
+    {
+        CurrentLineNumber = 0;
+    }
     void Update()
     {
         foreach(GameObject Line in Lines)
@@ -41,6 +47,7 @@ public class LineManager : MonoBehaviour
                     Vector3 newPos = hit.collider.gameObject.transform.position;
                     UnityEngine.Debug.Log("checked");
                     electron.transform.position = hit.collider.gameObject.transform.position;
+                    CurrentLineNumber = Lines.IndexOf(hit.collider.gameObject);
 
                     if (lastPos.y > newPos.y)
                     {
@@ -109,13 +116,15 @@ public class LineManager : MonoBehaviour
         foreach (GameObject line in Lines)
         {
             bool Checkd = false;
-            var kJDifference = ((int)((line.transform.position.y + 2.91) * 160 - (electronpos.y + 2.91f) * 160f));
             int LineNumber;
             int.TryParse(line.name, out LineNumber);
+            var kJ2 = init.Hydrogen.kJValues[LineNumber];
+            var kJ1 = init.Hydrogen.kJValues[CurrentLineNumber];
+            var kJDiff = kJ2 - kJ1;
             switch (CardNumber)
             {
                 case 0:
-                    if (kJDifference <= 630 && kJDifference > 0)
+                    if (kJDiff <= 630 && kJDiff > 0)
                     {
                         Checkd = true;
                     }
