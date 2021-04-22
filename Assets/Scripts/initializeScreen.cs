@@ -26,10 +26,12 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(Element element)
     {
         chosenElement = element;
+        Debug.Log(chosenElement.GetType());
     }
 
     public void initScreen()
     {
+        Debug.Log(chosenElement.name);
         List<Material> colorsUsed = new List<Material>();
 
         foreach (float i in chosenElement.linePositions)

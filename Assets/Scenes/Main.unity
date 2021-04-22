@@ -1815,7 +1815,8 @@ MonoBehaviour:
   Indigo: {fileID: 897650073}
   Violet: {fileID: 1713017294}
   CardManager: {fileID: 1570739005}
-  init: {fileID: 1830344514}
+  initScreen: {fileID: 1830344514}
+  currentElement: {fileID: 0}
   CurrentLineNumber: 0
 --- !u!4 &1119936858 stripped
 Transform:
