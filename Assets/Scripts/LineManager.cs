@@ -25,14 +25,6 @@ public class LineManager : MonoBehaviour
     }
     void Update()
     {
-        foreach(GameObject Line in Lines)
-        {
-            var pos = new Vector3(Line.transform.position.x + 0, Line.transform.position.y + 0, Line.transform.position.z);
-            var newpos = cam.WorldToScreenPoint(pos);
-            var index = Lines.IndexOf(Line);
-            var text = lineLabels[index];
-            text.transform.position = newpos;
-        }
         
         if(Input.GetMouseButtonDown(0))
         {
@@ -118,6 +110,8 @@ public class LineManager : MonoBehaviour
             bool Checkd = false;
             int LineNumber;
             int.TryParse(line.name, out LineNumber);
+            UnityEngine.Debug.Log(LineNumber);
+            UnityEngine.Debug.Log(init.Hydrogen.kJValues[0]);
             var kJ2 = init.Hydrogen.kJValues[LineNumber];
             var kJ1 = init.Hydrogen.kJValues[CurrentLineNumber];
             var kJDiff = kJ2 - kJ1;
