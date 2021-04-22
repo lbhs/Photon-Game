@@ -10,6 +10,7 @@ public class Element : MonoBehaviour
     public List<string> colors;
     public List<float> linePositions;
     public List<int> kJValues;
+  
     
 
 
@@ -23,6 +24,7 @@ public class Element : MonoBehaviour
 
     }
 
-    
+
+
 }
 

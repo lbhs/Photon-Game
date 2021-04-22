@@ -16,12 +16,15 @@ public class LineManager : MonoBehaviour
     public GameObject Indigo;
     public GameObject Violet;
     public GameObject CardManager;
-    public initializeScreen init;
+
+    public initializeScreen initScreen;
+    public Element currentElement;
     public int CurrentLineNumber;
 
     void Start()
     {
         CurrentLineNumber = 0;
+        
     }
     void Update()
     {
@@ -101,6 +104,7 @@ public class LineManager : MonoBehaviour
 
     public List<GameObject> CheckLines(GameObject Card)
     {
+        currentElement = initScreen.chosenElement;
         var electronpos = electron.transform.position;
         List<GameObject> ReturnLines = new List<GameObject>();
         int CardNumber;
@@ -110,10 +114,8 @@ public class LineManager : MonoBehaviour
             bool Checkd = false;
             int LineNumber;
             int.TryParse(line.name, out LineNumber);
-            UnityEngine.Debug.Log(LineNumber);
-            UnityEngine.Debug.Log(init.Hydrogen.kJValues[0]);
-            var kJ2 = init.Hydrogen.kJValues[LineNumber];
-            var kJ1 = init.Hydrogen.kJValues[CurrentLineNumber];
+            var kJ2 = currentElement.kJValues[LineNumber];
+            var kJ1 = currentElement.kJValues[CurrentLineNumber];
             var kJDiff = kJ2 - kJ1;
             switch (CardNumber)
             {
