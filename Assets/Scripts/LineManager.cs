@@ -27,8 +27,7 @@ public class LineManager : MonoBehaviour
         
     }
     void Update()
-    {
-        
+    { 
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -36,109 +35,96 @@ public class LineManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, 1000))
             {
-                if (Lines.Contains(hit.collider.gameObject) && CardManager.GetComponent<CardThing>().EligibleLines.Contains(hit.collider.gameObject))
+                if (Lines.Contains(hit.collider.gameObject))
                 {
-                    Vector3 lastPos = electron.transform.position;
-                    Vector3 newPos = hit.collider.gameObject.transform.position;
-                    UnityEngine.Debug.Log("checked");
-                    electron.transform.position = hit.collider.gameObject.transform.position;
-                    CurrentLineNumber = Lines.IndexOf(hit.collider.gameObject);
-
-                    if (lastPos.y > newPos.y)
+                    var card = CardManager.GetComponent<CardThing>().CurrentCard();
+                    var kJ = CheckLines(card, hit.collider.gameObject;
+                    if (kJ != null)
                     {
-                        Debug.Log((int)((lastPos.y + 2.91f) * 160f - (newPos.y + 2.91) * 160));
-                        var kJDifference = ((int)((lastPos.y + 2.91f) * 160f - (newPos.y + 2.91) * 160));
-
-                        if (kJDifference >= 158 && kJDifference <= 190)
+                        electron.transform.position = hit.collider.gameObject.transform.position;
+                        CurrentLineNumber = Lines.IndexOf(hit.collider.gameObject);
+                        
+                        if (kJ >= 158 && kJ <= 190)
                         {
                             Debug.Log("Red");
                             Red.SetActive(true);
                         }
-                        if (kJDifference >= 191 && kJDifference <= 201)
+                        if (kJ >= 191 && kJ <= 201)
                         {
                             Debug.Log("Orange");
                             Orange.SetActive(true);
                         }
-                        if (kJDifference >= 202 && kJDifference <= 210)
+                        if (kJ >= 202 && kJ <= 210)
                         {
                             Debug.Log("Yellow");
                             Yellow.SetActive(true);
                         }
-                        if (kJDifference >= 211 && kJDifference <= 238)
+                        if (kJ >= 211 && kJ <= 238)
                         {
                             Debug.Log("Green");
                             Green.SetActive(true);
                         }
-                        if (kJDifference >= 239 && kJDifference <= 245)
+                        if (kJ >= 239 && kJ <= 245)
                         {
                             Debug.Log("Cyan");
                             Blue.SetActive(true);
                         }
-                        if (kJDifference >= 246 && kJDifference <= 264)
+                        if (kJ >= 246 && kJ <= 264)
                         {
                             Debug.Log("Blue");
                             Indigo.SetActive(true);
                         }
-                        if (kJDifference >= 265 && kJDifference <= 312)
+                        if (kJ >= 265 && kJ <= 312)
                         {
                             Debug.Log("Violet");
                             Violet.SetActive(true);
                         }
-                        if (kJDifference > 312)
+                        if (kJ > 312)
                         {
                             Debug.Log("Ultraviolet");
-                            
                         }
-                        if (kJDifference < 158)
+                        if (kJ < 158)
                         {
                             Debug.Log("Infrared");
-                            
                         }
                     }
-
-                    
                 }
             }
         }
     }
 
-    public List<GameObject> CheckLines(GameObject Card)
+    public int CheckLines(GameObject Card, GameObject line)
     {
         currentElement = initScreen.chosenElement;
         var electronpos = electron.transform.position;
-        List<GameObject> ReturnLines = new List<GameObject>();
         int CardNumber;
         int.TryParse(Card.name, out CardNumber);
-        foreach (GameObject line in Lines)
+        bool Checkd = false;
+        int LineNumber;
+        int.TryParse(line.name, out LineNumber);
+        var kJ2 = currentElement.kJValues[LineNumber];
+        var kJ1 = currentElement.kJValues[CurrentLineNumber];
+        var kJDiff = kJ2 - kJ1;
+        switch (CardNumber)
         {
-            bool Checkd = false;
-            int LineNumber;
-            int.TryParse(line.name, out LineNumber);
-            var kJ2 = currentElement.kJValues[LineNumber];
-            var kJ1 = currentElement.kJValues[CurrentLineNumber];
-            var kJDiff = kJ2 - kJ1;
-            switch (CardNumber)
-            {
-                case 0:
-                    if (kJDiff <= 630 && kJDiff > 0)
-                    {
-                        Checkd = true;
-                    }
-                    break;
-                case 1:
-                    if (LineNumber == 3)
-                    {
-                        Checkd = true;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            if (Checkd)
-            {
-                ReturnLines.Add(line);
-            }
+            case 0:
+                if (kJDiff <= 630 && kJDiff > 0)
+                {
+                    Checkd = true;
+                }
+                break;
+            case 1:
+                if (LineNumber == 3)
+                {
+                    Checkd = true;
+                }
+                break;
+            default:
+                break;
         }
-        return ReturnLines;
+        if (Checkd)
+        {
+            return kJDiff;
+        }
     }
 }
