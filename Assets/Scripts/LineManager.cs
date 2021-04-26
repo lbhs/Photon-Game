@@ -39,7 +39,7 @@ public class LineManager : MonoBehaviour
                 {
                     var card = CardManager.GetComponent<CardThing>().CurrentCard();
                     var kJ = CheckLines(card, hit.collider.gameObject);
-                    if (kJ != null)
+                    if (kJ != 0)
                     {
                         electron.transform.position = hit.collider.gameObject.transform.position;
                         CurrentLineNumber = Lines.IndexOf(hit.collider.gameObject);

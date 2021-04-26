@@ -22,7 +22,7 @@ public class CardThing : MonoBehaviour
 
     public GameObject CurrentCard()
     {
-        Card = FlippedCards.Last();
-        return Cards;
+        var Card = FlippedCards.Last();
+        return Card;
     }
 }
