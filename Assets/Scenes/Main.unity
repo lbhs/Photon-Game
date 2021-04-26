@@ -1287,6 +1287,63 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1768991356}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &749599072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749599074}
+  - component: {fileID: 749599073}
+  m_Layer: 0
+  m_Name: Hydrogen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &749599073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749599072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementName: Hydrogen
+  colors:
+  - Violet
+  - Cyan
+  - Blue
+  - Red
+  linePositions:
+  - 0
+  - 6.15
+  - 7.2875
+  - 7.6875
+  - 7.875
+  - 7.96875
+  kJValues: 00000000d403000089040000c8040000e6040000f5040000
+--- !u!4 &749599074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749599072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -78.938416, y: -79.49138, z: -118.49366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 953113433}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &845089198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1529,6 +1586,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &953113432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 953113433}
+  m_Layer: 0
+  m_Name: Elements
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &953113433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953113432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 390.77454, y: 261.99802, z: -44.624367}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 749599074}
+  - {fileID: 1377674069}
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961561045
 GameObject:
@@ -2180,6 +2269,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1377674067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377674069}
+  - component: {fileID: 1377674068}
+  m_Layer: 0
+  m_Name: Oxygen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1377674068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377674067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementName: Oxygen
+  colors:
+  - Violet
+  - Green
+  - Blue
+  - Red
+  linePositions:
+  - 0
+  - 6.15
+  - 7.2875
+  - 7.6875
+  - 7.875
+  kJValues: 0000000050000000c80000008002000020030000
+--- !u!4 &1377674069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377674067}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -78.938416, y: -79.49138, z: -118.49366}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 953113433}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396697732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,7 +2498,6 @@ MonoBehaviour:
   - {fileID: 734940022}
   FlippedCards: []
   LineManager: {fileID: 1090655038}
-  EligibleLines: []
 --- !u!1 &1596559637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549,
@@ -2979,7 +3123,9 @@ MonoBehaviour:
   cam: {fileID: 0}
   lineLabels: []
   dropDown: {fileID: 0}
-  Hydrogen: {fileID: 0}
+  Hydrogen: {fileID: 749599073}
+  Oxygen: {fileID: 1377674068}
+  elementSelected: 
 --- !u!4 &1830344515
 Transform:
   m_ObjectHideFlags: 0

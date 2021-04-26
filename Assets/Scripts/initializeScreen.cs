@@ -13,27 +13,37 @@ public class initializeScreen : MonoBehaviour
     public List<GameObject> lineLabels;
     public GameObject dropDown;
     public Element Hydrogen;
-    
+    public Element Oxygen;
+    public string elementSelected = "";
+
     // Start is called before the first frame update
     void Start()
     {
-        Element Hydrogen = new Element("Hydrogen", new List<string> { "Violet", "Cyan", "Blue", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<int> { 0, 980, 1161, 1224, 1254, 1269 });
-        chooseElement(Hydrogen);
+        chooseElement(elementSelected);
         initScreen();
  
     }
 
-    public void chooseElement(Element element)
+    public void chooseElement(string elementSelect)
     {
-        chosenElement = element;
-        Debug.Log(chosenElement.GetType());
+        elementSelect = selectElement.elementNames;
+        List<Element> elementList = new List<Element>{ Hydrogen, Oxygen };
+        foreach (Element elementObject in elementList)
+        {
+            
+            if (elementSelect == elementObject.elementName)
+            {
+                chosenElement = elementObject;
+                
+                
+            }
+        }
     }
 
     public void initScreen()
     {
-        Debug.Log(chosenElement.name);
         List<Material> colorsUsed = new List<Material>();
-
+        Debug.Log(chosenElement);
         foreach (float i in chosenElement.linePositions)
         {
             Debug.Log(chosenElement.linePositions.IndexOf(i));
