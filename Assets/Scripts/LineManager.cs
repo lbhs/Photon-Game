@@ -38,7 +38,7 @@ public class LineManager : MonoBehaviour
                 if (Lines.Contains(hit.collider.gameObject))
                 {
                     var card = CardManager.GetComponent<CardThing>().CurrentCard();
-                    var kJ = CheckLines(card, hit.collider.gameObject;
+                    var kJ = CheckLines(card, hit.collider.gameObject);
                     if (kJ != null)
                     {
                         electron.transform.position = hit.collider.gameObject.transform.position;
@@ -125,6 +125,10 @@ public class LineManager : MonoBehaviour
         if (Checkd)
         {
             return kJDiff;
+        }
+        else
+        {
+            return 0;
         }
     }
 }
