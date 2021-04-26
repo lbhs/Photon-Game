@@ -6,6 +6,8 @@ using System.Linq;
 public class CardThing : MonoBehaviour
 {
     public List<GameObject> Cards;
+    public List<GameObject> CardsForIndex;
+
     public List<GameObject> FlippedCards;
     public GameObject LineManager;
 
@@ -20,9 +22,10 @@ public class CardThing : MonoBehaviour
         FlippedCards.Add(FirstCard);
     }
 
-    public GameObject CurrentCard()
+    public int CurrentCard()
     {
         var Card = FlippedCards.Last();
-        return Card;
+        var CardNumber = CardsForIndex.IndexOf(Card);
+        return CardNumber;
     }
 }
