@@ -1617,7 +1617,7 @@ Transform:
   - {fileID: 749599074}
   - {fileID: 1377674069}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &961561045
 GameObject:
@@ -1904,9 +1904,6 @@ MonoBehaviour:
   Indigo: {fileID: 897650073}
   Violet: {fileID: 1713017294}
   CardManager: {fileID: 1570739005}
-  initScreen: {fileID: 1830344514}
-  currentElement: {fileID: 0}
-  CurrentLineNumber: 0
 --- !u!4 &1119936858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8551778431804015759, guid: 5ce8e8668db785547b8b16e4be64f312,
@@ -2547,6 +2544,18 @@ MonoBehaviour:
   - {fileID: 734940022}
   FlippedCards: []
   LineManager: {fileID: 1090655038}
+  Lines:
+  - {fileID: 424219976}
+  - {fileID: 1977851095}
+  - {fileID: 1618100600}
+  - {fileID: 1966433001}
+  - {fileID: 30422418}
+  - {fileID: 1160907838}
+  electron: {fileID: 928050060}
+  CurrentLineNumber: 0
+  initScreen: {fileID: 1830344514}
+  currentElement: {fileID: 0}
+  EligibleLines: []
 --- !u!1 &1596559637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549,
