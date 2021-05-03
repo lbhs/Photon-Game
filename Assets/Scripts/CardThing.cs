@@ -17,9 +17,11 @@ public class CardThing : MonoBehaviour
     public initializeScreen initScreen;
     public Element currentElement;
     public List<GameObject> EligibleLines;
+    public Dictionary<GameObject, int> kJDic;
 
     public void Start()
     {
+        kJDic = new Dictionary<GameObject, int>();
         CurrentLineNumber = 0;
     }
 
@@ -55,48 +57,56 @@ public class CardThing : MonoBehaviour
                     if (kJDiff <= 1000 && kJDiff > 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 1:
                     if (LineNumber == 2)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 2:
                     if (LineNumber == 1)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 3:
                     if (kJDiff <= 700 && kJDiff >= 300)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 4:
                     if (kJDiff < 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 5:
                     if (LineNumber == 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 6:
                     if (kJDiff <= 300 && kJDiff >= 170)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 7:
                     if (kJDiff > 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 8:
@@ -105,6 +115,7 @@ public class CardThing : MonoBehaviour
                         if (LineNumber == 0)
                         {
                             ReturnLines.Add(line);
+                            kJDic[line] = kJDiff;
                         }
                     }
                     else
@@ -112,6 +123,7 @@ public class CardThing : MonoBehaviour
                         if (LineNumber == (CurrentLineNumber - 2))
                         {
                             ReturnLines.Add(line);
+                            kJDic[line] = kJDiff;
                         }
                     }
                     break;
@@ -119,12 +131,14 @@ public class CardThing : MonoBehaviour
                     if (kJDiff <= 700 && kJDiff >= 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 case 10:
                     if (kJDiff <= 800 && kJDiff >= 0)
                     {
                         ReturnLines.Add(line);
+                        kJDic[line] = kJDiff;
                     }
                     break;
                 default:
@@ -146,4 +160,5 @@ public class CardThing : MonoBehaviour
         CurrentLineNumber = linenumber;
         EligibleLines = null;
     }
+
 }
