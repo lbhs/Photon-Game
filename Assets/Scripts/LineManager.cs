@@ -36,6 +36,37 @@ public class LineManager : MonoBehaviour
                     {
                         electron.transform.position = hit.collider.gameObject.transform.position;
                         CardManager.GetComponent<CardThing>().UpdateCurrentLine(Lines.IndexOf(hit.collider.gameObject));
+                        var kj = CardManager.GetComponent<CardThing>().kJDic[hit.collider.gameObject];
+                        UnityEngine.Debug.Log(kj);
+                        
+                        if(kj >= -210 && kj <= -158)
+                        {
+                            Red.SetActive(true);
+                        }
+                        if (kj >= -310 && kj <= -211)
+                        {
+                            Orange.SetActive(true);
+                        }
+                        if (kj >= -410 && kj <= -311)
+                        {
+                            Yellow.SetActive(true);
+                        }
+                        if (kj >= -510 && kj <= -411)
+                        {
+                            Green.SetActive(true);
+                        }
+                        if (kj >= -610 && kj <= -511)
+                        {
+                            Blue.SetActive(true);
+                        }
+                        if (kj >= -710 && kj <= -611)
+                        {
+                            Indigo.SetActive(true);
+                        }
+                        if (kj >= -810 && kj <= -711)
+                        {
+                            Violet.SetActive(true);
+                        }
                     }
                 }
             }
