@@ -30,12 +30,10 @@ public class LineManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, 1000))
             {
-                if (Lines.Contains(hit.collider.gameObject))
+                if (CardManager.GetComponent<CardThing>().EligibleLines1.Contains(hit.collider.gameObject) || CardManager.GetComponent<CardThing>().EligibleLines2.Contains(hit.collider.gameObject))
                 {
-                    if (CardManager.GetComponent<CardThing>().EligibleLines.Contains(hit.collider.gameObject))
-                    {
                         electron.transform.position = hit.collider.gameObject.transform.position;
-                        CardManager.GetComponent<CardThing>().UpdateCurrentLine(Lines.IndexOf(hit.collider.gameObject));
+                        CardManager.GetComponent<CardThing>().UpdateCurrentLine(hit.collider.gameObject);
                         var kj = CardManager.GetComponent<CardThing>().kJDic[hit.collider.gameObject];
                         UnityEngine.Debug.Log(kj);
                         
@@ -67,7 +65,7 @@ public class LineManager : MonoBehaviour
                         {
                             Violet.SetActive(true);
                         }
-                    }
+                    
                 }
             }
         }

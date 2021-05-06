@@ -11,18 +11,19 @@ public class CardThing : MonoBehaviour
     public List<GameObject> FlippedCards;
     public GameObject LineManager;
 
-    public List<GameObject> Lines;
     public GameObject electron;
-    public int CurrentLineNumber;
+    public int CurrentLineNumber1;
+    public int CurrentLineNumber2;
     public initializeScreen initScreen;
-    public Element currentElement;
-    public List<GameObject> EligibleLines;
+    public List<GameObject> EligibleLines1;
+    public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
 
     public void Start()
     {
         kJDic = new Dictionary<GameObject, int>();
-        CurrentLineNumber = 0;
+        CurrentLineNumber1 = 0;
+        CurrentLineNumber2 = 0;
     }
 
     public void FlipFirstCard()
@@ -34,22 +35,23 @@ public class CardThing : MonoBehaviour
         FirstCard.transform.position = new Vector3(pos.x, pos.y, 0 - pos.z);
         Cards.Remove(FirstCard);
         FlippedCards.Add(FirstCard);
-        EligibleLines = CheckLines();
-    }
 
-    public List<GameObject> CheckLines()
-    {
-        currentElement = initScreen.chosenElement;
-        var electronpos = electron.transform.position;
         var currentcard = FlippedCards.Last();
         var CardNumber = CardsForIndex.IndexOf(currentcard);
-        UnityEngine.Debug.Log("Card Number: " + CardNumber);
+        EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
+        EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
+    }
+
+    public List<GameObject> CheckLines(List<GameObject> Linelist, Element element, int CardNumber, int CurrentLineNumber)
+    {
+        var electronpos = electron.transform.position;
         List<GameObject> ReturnLines = new List<GameObject>();
-        foreach (GameObject line in Lines)
+
+        foreach (GameObject line in Linelist)
         {
-            int LineNumber = Lines.IndexOf(line);
-            var kJ2 = currentElement.kJValues[LineNumber];
-            var kJ1 = currentElement.kJValues[CurrentLineNumber];
+            int LineNumber = Linelist.IndexOf(line);
+            var kJ2 = element.kJValues[LineNumber];
+            var kJ1 = element.kJValues[CurrentLineNumber];
             var kJDiff = kJ2 - kJ1;
             switch (CardNumber)
             {
@@ -155,10 +157,18 @@ public class CardThing : MonoBehaviour
         }
     }
 
-    public void UpdateCurrentLine(int linenumber)
+    public void UpdateCurrentLine(GameObject line)
     {
-        CurrentLineNumber = linenumber;
-        EligibleLines = null;
+        if (initScreen.levels.Contains(line))
+        {
+            CurrentLineNumber1 = initScreen.levels.IndexOf(line);
+        }
+        if (initScreen.levels2.Contains(line))
+        {
+            CurrentLineNumber2 = initScreen.levels.IndexOf(line);
+        }
+        EligibleLines1 = null;
+        EligibleLines2 = null;
     }
 
 }
