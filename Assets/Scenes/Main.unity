@@ -1308,9 +1308,6 @@ MonoBehaviour:
   Indigo: {fileID: 897650073}
   Violet: {fileID: 1713017294}
   CardManager: {fileID: 1570739005}
-  initScreen: {fileID: 1830344514}
-  currentElement: {fileID: 0}
-  CurrentLineNumber: 0
 --- !u!212 &653686204
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2443,9 +2440,6 @@ MonoBehaviour:
   Indigo: {fileID: 897650073}
   Violet: {fileID: 1713017294}
   CardManager: {fileID: 1570739005}
-  initScreen: {fileID: 1830344514}
-  currentElement: {fileID: 0}
-  CurrentLineNumber: 0
 --- !u!4 &1119936858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8551778431804015759, guid: 5ce8e8668db785547b8b16e4be64f312,
@@ -3198,6 +3192,12 @@ MonoBehaviour:
   - {fileID: 734940022}
   FlippedCards: []
   LineManager: {fileID: 1090655038}
+  Lines: []
+  electron: {fileID: 0}
+  CurrentLineNumber: 0
+  initScreen: {fileID: 0}
+  currentElement: {fileID: 0}
+  EligibleLines: []
 --- !u!1 &1578914070
 GameObject:
   m_ObjectHideFlags: 0
