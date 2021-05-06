@@ -6,15 +6,18 @@ public class initializeScreen : MonoBehaviour
 {
     public Element element;
     public List<GameObject> levels;
+    public List<GameObject> levels2;
     public List<Material> boxColors;
     public Element chosenElement;
+    public Element chosenElement2;
     public List<GameObject> Lines;
     public Camera cam;
     public List<GameObject> lineLabels;
     public GameObject dropDown;
     public Element Hydrogen;
+    public Element Copper;
     public Element Oxygen;
-    public string elementSelected = "";
+    public string elementSelected = "Hydrogen";
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +30,17 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(string elementSelect)
     {
         elementSelect = selectElement.elementNames;
-        List<Element> elementList = new List<Element>{ Hydrogen, Oxygen };
+        List<Element> elementList = new List<Element>{ Hydrogen, Copper, Oxygen };
         foreach (Element elementObject in elementList)
         {
             
             if (elementSelect == elementObject.elementName)
             {
                 chosenElement = elementObject;
-                
+                if (chosenElement.elementName == "Copper")
+                {
+                    chosenElement2 = Oxygen;
+                }
                 
             }
         }
@@ -47,7 +53,13 @@ public class initializeScreen : MonoBehaviour
         foreach (float i in chosenElement.linePositions)
         {
             Debug.Log(chosenElement.linePositions.IndexOf(i));
-            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(3.41f, i - 2.91f, 0);
+            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i - 2.493781f, 0);
+        }
+
+        foreach (float i in chosenElement2.linePositions)
+        {
+            Debug.Log(chosenElement2.linePositions.IndexOf(i));
+            levels[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(6, i - 2.493781f, 0);
         }
 
         int sideSwitcher = 0;
