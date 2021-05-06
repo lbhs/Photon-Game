@@ -37,9 +37,9 @@ public class initializeScreen : MonoBehaviour
             if (elementSelect == elementObject.elementName)
             {
                 chosenElement = elementObject;
-                if (chosenElement.elementName == "Copper")
+                if (chosenElement.elementName == "Oxygen")
                 {
-                    chosenElement2 = Oxygen;
+                    chosenElement2 = Copper;
                 }
                 
             }
@@ -50,16 +50,17 @@ public class initializeScreen : MonoBehaviour
     {
         List<Material> colorsUsed = new List<Material>();
         Debug.Log(chosenElement);
+        Debug.Log(chosenElement2);
         foreach (float i in chosenElement.linePositions)
         {
             Debug.Log(chosenElement.linePositions.IndexOf(i));
-            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i - 2.493781f, 0);
+            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
         }
 
         foreach (float i in chosenElement2.linePositions)
         {
             Debug.Log(chosenElement2.linePositions.IndexOf(i));
-            levels[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(6, i - 2.493781f, 0);
+            levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
         }
 
         int sideSwitcher = 0;
