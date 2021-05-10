@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1530,30 +1530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adebca5b6989a4792980ac850fcd23fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lines:
-  - {fileID: 581735522}
-  - {fileID: 997015404}
-  - {fileID: 1282542844}
-  - {fileID: 856491081}
-  - {fileID: 958103601}
-  - {fileID: 0}
-  electron: {fileID: 1593090845}
-  lineLabels:
-  - {fileID: 69020907}
-  - {fileID: 137427359}
-  - {fileID: 2063979660}
-  - {fileID: 1274723928}
-  - {fileID: 1629869637}
-  - {fileID: 351012101}
-  cam: {fileID: 483147730}
-  Red: {fileID: 1972736409}
-  Orange: {fileID: 1851243011}
-  Yellow: {fileID: 1377266111}
-  Green: {fileID: 1396697732}
-  Blue: {fileID: 337235826}
-  Indigo: {fileID: 897650073}
-  Violet: {fileID: 1713017294}
-  CardManager: {fileID: 1570739005}
 --- !u!212 &653686204
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2721,30 +2697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adebca5b6989a4792980ac850fcd23fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Lines:
-  - {fileID: 424219976}
-  - {fileID: 1977851095}
-  - {fileID: 1618100600}
-  - {fileID: 1966433001}
-  - {fileID: 30422418}
-  - {fileID: 0}
-  electron: {fileID: 928050060}
-  lineLabels:
-  - {fileID: 69020907}
-  - {fileID: 137427359}
-  - {fileID: 2063979660}
-  - {fileID: 1274723928}
-  - {fileID: 1629869637}
-  - {fileID: 351012101}
-  cam: {fileID: 483147730}
-  Red: {fileID: 1972736409}
-  Orange: {fileID: 1851243011}
-  Yellow: {fileID: 1377266111}
-  Green: {fileID: 1396697732}
-  Blue: {fileID: 337235826}
-  Indigo: {fileID: 897650073}
-  Violet: {fileID: 1713017294}
-  CardManager: {fileID: 1570739005}
 --- !u!114 &1090655042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4038,6 +3990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee93b5bca46f4a145878e0ddcd16e006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 483147730}
   Cards:
   - {fileID: 1596559637}
   - {fileID: 981453473}
@@ -4064,12 +4017,20 @@ MonoBehaviour:
   - {fileID: 734940022}
   FlippedCards: []
   LineManager: {fileID: 1090655038}
-  Lines: []
-  electron: {fileID: 928050060}
-  CurrentLineNumber: 0
+  electron1: {fileID: 928050060}
+  electron2: {fileID: 1593090845}
+  CurrentLineNumber1: 0
+  CurrentLineNumber2: 0
   initScreen: {fileID: 1830344514}
-  currentElement: {fileID: 0}
-  EligibleLines: []
+  EligibleLines1: []
+  EligibleLines2: []
+  Red: {fileID: 1972736409}
+  Orange: {fileID: 1851243011}
+  Yellow: {fileID: 1377266111}
+  Green: {fileID: 1396697732}
+  Blue: {fileID: 337235826}
+  Indigo: {fileID: 897650073}
+  Violet: {fileID: 1713017294}
 --- !u!1 &1593090845
 GameObject:
   m_ObjectHideFlags: 0

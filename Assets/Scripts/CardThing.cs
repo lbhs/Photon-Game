@@ -5,13 +5,16 @@ using System.Linq;
 
 public class CardThing : MonoBehaviour
 {
+    public Camera cam;
+
     public List<GameObject> Cards;
     public List<GameObject> CardsForIndex;
 
     public List<GameObject> FlippedCards;
     public GameObject LineManager;
 
-    public GameObject electron;
+    public GameObject electron1;
+    public GameObject electron2;
     public int CurrentLineNumber1;
     public int CurrentLineNumber2;
     public initializeScreen initScreen;
@@ -19,11 +22,106 @@ public class CardThing : MonoBehaviour
     public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
 
+    public GameObject Red;
+    public GameObject Orange;
+    public GameObject Yellow;
+    public GameObject Green;
+    public GameObject Blue;
+    public GameObject Indigo;
+    public GameObject Violet;
+
     public void Start()
     {
         kJDic = new Dictionary<GameObject, int>();
         CurrentLineNumber1 = 0;
         CurrentLineNumber2 = 0;
+    }
+
+    public void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 1000))
+            {
+                if (EligibleLines1.Contains(hit.collider.gameObject))
+                {
+                    electron1.transform.position = hit.collider.gameObject.transform.position;
+                    UpdateCurrentLine(hit.collider.gameObject, 1);
+                    var kj = kJDic[hit.collider.gameObject];
+                    UnityEngine.Debug.Log(kj);
+
+                    if (kj >= -210 && kj <= -158)
+                    {
+                        Red.SetActive(true);
+                    }
+                    if (kj >= -310 && kj <= -211)
+                    {
+                        Orange.SetActive(true);
+                    }
+                    if (kj >= -410 && kj <= -311)
+                    {
+                        Yellow.SetActive(true);
+                    }
+                    if (kj >= -510 && kj <= -411)
+                    {
+                        Green.SetActive(true);
+                    }
+                    if (kj >= -610 && kj <= -511)
+                    {
+                        Blue.SetActive(true);
+                    }
+                    if (kj >= -710 && kj <= -611)
+                    {
+                        Indigo.SetActive(true);
+                    }
+                    if (kj >= -810 && kj <= -711)
+                    {
+                        Violet.SetActive(true);
+                    }
+
+                }
+                if (EligibleLines2.Contains(hit.collider.gameObject))
+                {
+                    electron2.transform.position = hit.collider.gameObject.transform.position;
+                    UpdateCurrentLine(hit.collider.gameObject, 2);
+                    var kj = kJDic[hit.collider.gameObject];
+                    UnityEngine.Debug.Log(kj);
+
+                    if (kj >= -210 && kj <= -158)
+                    {
+                        Red.SetActive(true);
+                    }
+                    if (kj >= -310 && kj <= -211)
+                    {
+                        Orange.SetActive(true);
+                    }
+                    if (kj >= -410 && kj <= -311)
+                    {
+                        Yellow.SetActive(true);
+                    }
+                    if (kj >= -510 && kj <= -411)
+                    {
+                        Green.SetActive(true);
+                    }
+                    if (kj >= -610 && kj <= -511)
+                    {
+                        Blue.SetActive(true);
+                    }
+                    if (kj >= -710 && kj <= -611)
+                    {
+                        Indigo.SetActive(true);
+                    }
+                    if (kj >= -810 && kj <= -711)
+                    {
+                        Violet.SetActive(true);
+                    }
+
+                }
+            }
+        }
     }
 
     public void FlipFirstCard()
@@ -44,7 +142,6 @@ public class CardThing : MonoBehaviour
 
     public List<GameObject> CheckLines(List<GameObject> Linelist, Element element, int CardNumber, int CurrentLineNumber)
     {
-        var electronpos = electron.transform.position;
         List<GameObject> ReturnLines = new List<GameObject>();
 
         foreach (GameObject line in Linelist)
@@ -157,13 +254,13 @@ public class CardThing : MonoBehaviour
         }
     }
 
-    public void UpdateCurrentLine(GameObject line)
+    public void UpdateCurrentLine(GameObject line, int number)
     {
-        if (initScreen.levels.Contains(line))
+        if (number == 1)
         {
             CurrentLineNumber1 = initScreen.levels.IndexOf(line);
         }
-        if (initScreen.levels2.Contains(line))
+        if (number == 2)
         {
             CurrentLineNumber2 = initScreen.levels.IndexOf(line);
         }
