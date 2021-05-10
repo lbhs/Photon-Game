@@ -24,6 +24,7 @@ public class Outlines : MonoBehaviour
         {
             var index = LineList.IndexOf(line);
             var outline = OutlineList[index];
+            outline.transform.position = new Vector3(line.transform.position.x, line.transform.position.y, line.transform.position.z + 0.5f);
 
             if (EligibleLines.Contains(line))
             {

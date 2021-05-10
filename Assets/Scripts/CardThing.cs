@@ -138,6 +138,14 @@ public class CardThing : MonoBehaviour
         var CardNumber = CardsForIndex.IndexOf(currentcard);
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
+        foreach (GameObject line in EligibleLines1)
+        {
+            UnityEngine.Debug.Log(line.name);
+        }
+        foreach (GameObject line in EligibleLines2)
+        {
+            UnityEngine.Debug.Log(line.name);
+        }
     }
 
     public List<GameObject> CheckLines(List<GameObject> Linelist, Element element, int CardNumber, int CurrentLineNumber)
@@ -153,7 +161,7 @@ public class CardThing : MonoBehaviour
             switch (CardNumber)
             {
                 case 0:
-                    if (kJDiff <= 1000 && kJDiff > 0)
+                    if (kJDiff <= 630 && kJDiff > 0)
                     {
                         ReturnLines.Add(line);
                         kJDic[line] = kJDiff;
@@ -244,14 +252,7 @@ public class CardThing : MonoBehaviour
                     break;
             }
         }
-        if (ReturnLines.Count() > 0)
-        {
-            return ReturnLines;
-        }
-        else
-        {
-            return null;
-        }
+        return ReturnLines;
     }
 
     public void UpdateCurrentLine(GameObject line, int number)
@@ -259,13 +260,15 @@ public class CardThing : MonoBehaviour
         if (number == 1)
         {
             CurrentLineNumber1 = initScreen.levels.IndexOf(line);
+            UnityEngine.Debug.Log("Current Line1 = " + CurrentLineNumber1);
         }
         if (number == 2)
         {
-            CurrentLineNumber2 = initScreen.levels.IndexOf(line);
+            CurrentLineNumber2 = initScreen.levels2.IndexOf(line);
+            UnityEngine.Debug.Log("Current Line2 = " + CurrentLineNumber2);
         }
-        EligibleLines1 = null;
-        EligibleLines2 = null;
+        EligibleLines1.Clear();
+        EligibleLines2.Clear();
     }
 
 }
