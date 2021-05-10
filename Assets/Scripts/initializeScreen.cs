@@ -4,46 +4,80 @@ using UnityEngine;
 
 public class initializeScreen : MonoBehaviour
 {
-    public Element Hydrogen;
+    public Element element;
     public List<GameObject> levels;
+    public List<GameObject> levels2;
     public List<Material> boxColors;
     public Element chosenElement;
+    public Element chosenElement2;
+    public List<GameObject> Lines;
+    public List<GameObject> Lines2;
+    public Camera cam;
+    public List<GameObject> lineLabels;
+    public GameObject dropDown;
+    public Element Hydrogen;
+    public Element Copper;
+    public Element Oxygen;
+    public string elementSelected = "Hydrogen";
 
     // Start is called before the first frame update
     void Start()
     {
-        Hydrogen = new Element("Hydrogen",  new List<string> { "Violet", "Cyan", "Blue", "Red" }, new List<float> { 0, 6.15f, 7.2875f, 7.6875f, 7.875f, 7.96875f }, new List<int> { 0, 980, 1161, 1224, 1254, 1269 });
-        chooseElement(Hydrogen);
+        chooseElement(elementSelected);
         initScreen();
  
     }
 
-    public void chooseElement(Element element)
+    public void chooseElement(string elementSelect)
     {
-        chosenElement = element;
+        elementSelect = selectElement.elementNames;
+        List<Element> elementList = new List<Element>{ Hydrogen, Copper, Oxygen };
+        foreach (Element elementObject in elementList)
+        {
+            
+            if (elementSelect == elementObject.elementName)
+            {
+                chosenElement = elementObject;
+                if (chosenElement.elementName == "Oxygen")
+                {
+                    chosenElement2 = Copper;
+                }
+                
+            }
+        }
     }
 
     public void initScreen()
     {
         List<Material> colorsUsed = new List<Material>();
-
-        foreach (Material i in boxColors)
-        {
-
-            if (Hydrogen.colors.Contains(i.name) == true) {
-
-                colorsUsed.Add(i);
-
-            }
-            
-        }
-
+        Debug.Log(chosenElement);
+        Debug.Log(chosenElement2);
         foreach (float i in chosenElement.linePositions)
         {
             Debug.Log(chosenElement.linePositions.IndexOf(i));
-            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(3.41f, i - 2.91f, 0);
+            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
         }
-       
+
+        foreach (float i in chosenElement2.linePositions)
+        {
+            Debug.Log(chosenElement2.linePositions.IndexOf(i));
+            levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
+        }
+
+        foreach (GameObject Line in Lines)
+        {
+
+            Line.transform.position = cam.WorldToScreenPoint(levels[Lines.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
+
+        }
+
+        foreach (GameObject Line in Lines2)
+        {
+
+            Line.transform.position = cam.WorldToScreenPoint(levels2[Lines2.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
+
+        }
+
     }
 
 }
