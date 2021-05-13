@@ -18,15 +18,13 @@ public class Outlines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         var EligibleLines = CardManager.GetComponent<CardThing>().EligibleLines1;
 
         foreach (GameObject line in LineList)
         {
             var index = LineList.IndexOf(line);
             var outline = OutlineList[index];
-            outline.transform.position = line.transform.position;
+            outline.transform.position = new Vector3(line.transform.position.x, line.transform.position.y, line.transform.position.z + 0.5f);
 
             if (EligibleLines.Contains(line))
             {

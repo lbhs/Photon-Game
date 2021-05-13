@@ -11,6 +11,7 @@ public class initializeScreen : MonoBehaviour
     public Element chosenElement;
     public Element chosenElement2;
     public List<GameObject> Lines;
+    public List<GameObject> Lines2;
     public Camera cam;
     public List<GameObject> lineLabels;
     public GameObject dropDown;
@@ -63,27 +64,17 @@ public class initializeScreen : MonoBehaviour
             levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
         }
 
-        int sideSwitcher = 0;
         foreach (GameObject Line in Lines)
         {
 
-            if (sideSwitcher % 2 == 0)
-            {
-                var pos = new Vector3(Line.transform.position.x - 3, Line.transform.position.y + 0, Line.transform.position.z);
-                var newpos = cam.WorldToScreenPoint(pos);
-                var index = Lines.IndexOf(Line);
-                var text = lineLabels[index];
-                text.transform.position = newpos;
-            }
-            if (sideSwitcher % 2 != 0)
-            {
-                var pos = new Vector3(Line.transform.position.x + 5, Line.transform.position.y + 0, Line.transform.position.z);
-                var newpos = cam.WorldToScreenPoint(pos);
-                var index = Lines.IndexOf(Line);
-                var text = lineLabels[index];
-                text.transform.position = newpos;
-            }
-            sideSwitcher += 1;
+            Line.transform.position = cam.WorldToScreenPoint(levels[Lines.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
+
+        }
+
+        foreach (GameObject Line in Lines2)
+        {
+
+            Line.transform.position = cam.WorldToScreenPoint(levels2[Lines2.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
 
         }
 
