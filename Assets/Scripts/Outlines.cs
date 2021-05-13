@@ -8,6 +8,8 @@ public class Outlines : MonoBehaviour
     public GameObject CardManager;
     public List<GameObject> LineList;
     public List<GameObject> OutlineList;
+    public List<GameObject> LineList2;
+    public List<GameObject> OutlineList2;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,25 @@ public class Outlines : MonoBehaviour
                 outline.SetActive(false);
             }
 
+        }
+
+        var EligibleLines2 = CardManager.GetComponent<CardThing>().EligibleLines2;
+
+        foreach (GameObject line in LineList2)
+        {
+            var index = LineList2.IndexOf(line);
+            var outline = OutlineList2[index];
+            outline.transform.position = new Vector3(line.transform.position.x, line.transform.position.y, line.transform.position.z + 0.5f);
+
+            if (EligibleLines2.Contains(line))
+            {
+                outline.SetActive(true);
+            }
+
+            else
+            {
+                outline.SetActive(false);
+            }
         }
     }
 }
