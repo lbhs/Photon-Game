@@ -10,7 +10,7 @@ public class Outlines : MonoBehaviour
     public List<GameObject> OutlineList;
     public List<GameObject> LineList2;
     public List<GameObject> OutlineList2;
-    public GameObject CardOutline;
+    //public GameObject CardOutline;
 
     // Start is called before the first frame update
     void Start()
@@ -61,9 +61,9 @@ public class Outlines : MonoBehaviour
             }
         }
 
-        if ((EligibleLines.Count == 0) && (EligibleLines2.Count == 0))
+        /*if ((EligibleLines.Count == 0) && (EligibleLines2.Count == 0))
         {
             CardOutline.SetActive(true);
-        }
+        }*/
     }
 }
