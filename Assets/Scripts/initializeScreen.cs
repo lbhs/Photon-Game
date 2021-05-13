@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.UI;
 
 public class initializeScreen : MonoBehaviour
 {
@@ -52,22 +54,38 @@ public class initializeScreen : MonoBehaviour
         List<Material> colorsUsed = new List<Material>();
         Debug.Log(chosenElement);
         Debug.Log(chosenElement2);
-        foreach (float i in chosenElement.linePositions)
+ //       foreach (float i in chosenElement.linePositions)
+  //      {
+  //          Debug.Log(chosenElement.linePositions.IndexOf(i));
+  //          levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
+ //       }
+
+  //      foreach (float i in chosenElement2.linePositions)
+  //      {
+  //          Debug.Log(chosenElement2.linePositions.IndexOf(i));
+  //          levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
+  //      }
+
+        foreach (GameObject level in levels)
         {
-            Debug.Log(chosenElement.linePositions.IndexOf(i));
-            levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
+            var biggestkj = chosenElement.kJValues.Last();
+            var position = (biggestkj - chosenElement.kJValues[levels.IndexOf(level)]) * 6.6 / biggestkj;
+            level.transform.position = new Vector3(0, 6.6f - (float)position, 0);
         }
 
-        foreach (float i in chosenElement2.linePositions)
+        foreach (GameObject level in levels2)
         {
-            Debug.Log(chosenElement2.linePositions.IndexOf(i));
-            levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
+            var biggestkj = chosenElement2.kJValues.Last();
+            var position = (biggestkj - chosenElement2.kJValues[levels2.IndexOf(level)]) * 6.6 / biggestkj;
+            level.transform.position = new Vector3(5.8f, 6.6f - (float)position, 0);
         }
 
         foreach (GameObject Line in Lines)
         {
-
             Line.transform.position = cam.WorldToScreenPoint(levels[Lines.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
+            var biggestkj = chosenElement.kJValues.Last();
+            var newkj = biggestkj - chosenElement.kJValues[Lines.IndexOf(Line)];
+            Line.GetComponent<Text>().text = "-" + newkj + " kJ";
 
         }
 
@@ -75,7 +93,9 @@ public class initializeScreen : MonoBehaviour
         {
 
             Line.transform.position = cam.WorldToScreenPoint(levels2[Lines2.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
-
+            var biggestkj = chosenElement2.kJValues.Last();
+            var newkj = biggestkj - chosenElement2.kJValues[Lines2.IndexOf(Line)];
+            Line.GetComponent<Text>().text = "-" + newkj + " kJ";
         }
 
     }

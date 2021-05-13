@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1502,7 +1502,6 @@ GameObject:
   - component: {fileID: 653686202}
   - component: {fileID: 653686204}
   - component: {fileID: 653686203}
-  - component: {fileID: 653686205}
   m_Layer: 0
   m_Name: well 2
   m_TagString: Untagged
@@ -1586,33 +1585,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &653686205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653686201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55dc93f1e0f7b4b43986b5ce5d8e64f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CardManager: {fileID: 0}
-  LineList: []
-  OutlineList: []
-  LineList2:
-  - {fileID: 958103601}
-  - {fileID: 856491081}
-  - {fileID: 1282542844}
-  - {fileID: 997015404}
-  - {fileID: 581735522}
-  OutlineList2:
-  - {fileID: 1021082900}
-  - {fileID: 888003109}
-  - {fileID: 1905897449}
-  - {fileID: 825364927}
-  - {fileID: 1816444582}
 --- !u!1 &655588829 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 944207635432871678, guid: ded78c464788438408bdf3a049e3b2f3,
@@ -3274,8 +3246,18 @@ MonoBehaviour:
   - {fileID: 881060152}
   - {fileID: 1200578344}
   - {fileID: 1599945698}
-  LineList2: []
-  OutlineList2: []
+  LineList2:
+  - {fileID: 958103601}
+  - {fileID: 856491081}
+  - {fileID: 1282542844}
+  - {fileID: 997015404}
+  - {fileID: 581735522}
+  OutlineList2:
+  - {fileID: 1021082900}
+  - {fileID: 888003109}
+  - {fileID: 1905897449}
+  - {fileID: 825364927}
+  - {fileID: 1816444582}
 --- !u!4 &1119936858 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8551778431804015759, guid: 5ce8e8668db785547b8b16e4be64f312,
