@@ -69,15 +69,15 @@ public class initializeScreen : MonoBehaviour
         foreach (GameObject level in levels)
         {
             var biggestkj = chosenElement.kJValues.Last();
-            var position = (biggestkj - chosenElement.kJValues[levels.IndexOf(level)]) * 6.6 / biggestkj;
-            level.transform.position = new Vector3(0, 6.6f - (float)position, 0);
+            var position = chosenElement.kJValues[levels.IndexOf(level)] * 6.6 / biggestkj;
+            level.transform.position = new Vector3(0, (float)position, 0);
         }
 
         foreach (GameObject level in levels2)
         {
             var biggestkj = chosenElement2.kJValues.Last();
-            var position = (biggestkj - chosenElement2.kJValues[levels2.IndexOf(level)]) * 6.6 / biggestkj;
-            level.transform.position = new Vector3(5.8f, 6.6f - (float)position, 0);
+            var position = chosenElement2.kJValues[levels2.IndexOf(level)] * 6.6 / biggestkj;
+            level.transform.position = new Vector3(5.8f, (float)position, 0);
         }
 
         foreach (GameObject Line in Lines)
