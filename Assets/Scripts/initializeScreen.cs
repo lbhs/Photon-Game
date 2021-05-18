@@ -20,6 +20,8 @@ public class initializeScreen : MonoBehaviour
     public Element Hydrogen;
     public Element Copper;
     public Element Oxygen;
+    public Element Sodium;
+    public Element Nitrogen;
     public string elementSelected = "Hydrogen";
 
     // Start is called before the first frame update
@@ -33,7 +35,7 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(string elementSelect)
     {
         elementSelect = selectElement.elementNames;
-        List<Element> elementList = new List<Element>{ Hydrogen, Copper, Oxygen };
+        List<Element> elementList = new List<Element>{ Hydrogen, Oxygen, Sodium };
         foreach (Element elementObject in elementList)
         {
             
@@ -44,6 +46,11 @@ public class initializeScreen : MonoBehaviour
                 {
                     chosenElement2 = Copper;
                 }
+                if (chosenElement.elementName == "Sodium")
+                {
+                    chosenElement2 = Nitrogen;
+                }
+
                 
             }
         }
