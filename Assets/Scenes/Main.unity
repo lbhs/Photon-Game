@@ -2730,7 +2730,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928050060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100.333534}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.21954687, y: 0.21954687, z: 0.27443358}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4793,20 +4793,7 @@ MonoBehaviour:
   - {fileID: 1463496304}
   - {fileID: 377828181}
   - {fileID: 734940022}
-  CardsForIndex:
-  - {fileID: 1596559637}
-  - {fileID: 981453473}
-  - {fileID: 655588829}
-  - {fileID: 2005731166}
-  - {fileID: 280011273}
-  - {fileID: 1257448158}
-  - {fileID: 232626458}
-  - {fileID: 266934206}
-  - {fileID: 1463496304}
-  - {fileID: 377828181}
-  - {fileID: 734940022}
   FlippedCards: []
-  LineManager: {fileID: 1090655038}
   electron1: {fileID: 928050060}
   electron2: {fileID: 1593090845}
   CurrentLineNumber1: 0
@@ -4846,7 +4833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593090845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.8, y: 0, z: 0}
+  m_LocalPosition: {x: 5.8, y: 0, z: -1}
   m_LocalScale: {x: 0.21954401, y: 0.21954401, z: 0.27443}
   m_Children: []
   m_Father: {fileID: 0}
