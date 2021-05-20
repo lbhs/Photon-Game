@@ -30,6 +30,14 @@ public class CardThing : MonoBehaviour
     public GameObject Indigo;
     public GameObject Violet;
 
+    public AudioSource red;
+    public AudioSource orange;
+    public AudioSource yellow;
+    public AudioSource green;
+    public AudioSource blue;
+    public AudioSource indigo;
+    public AudioSource violet;
+
     public void Start()
     {
         kJDic = new Dictionary<GameObject, int>();
@@ -56,30 +64,41 @@ public class CardThing : MonoBehaviour
                     if (kj >= -210 && kj <= -158)
                     {
                         Red.SetActive(true);
+                        red.Play();
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
+                        orange.Play();
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
+                        yellow.Play();
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
+                        green.Play();
+
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
+                        blue.Play();
+
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
+                        indigo.Play();
+
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
+                        violet.Play();
+
                     }
 
                 }
@@ -93,30 +112,42 @@ public class CardThing : MonoBehaviour
                     if (kj >= -210 && kj <= -158)
                     {
                         Red.SetActive(true);
+                        red.Play();
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
+                        orange.Play();
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
+                        yellow.Play();
+
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
+                        green.Play();
+
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
+                        blue.Play();
+
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
+                        indigo.Play();
+
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
+                        violet.Play();
+
                     }
 
                 }
