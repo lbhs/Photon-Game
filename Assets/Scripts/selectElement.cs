@@ -15,6 +15,6 @@ public class selectElement : MonoBehaviour
         button = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
         elementNames = button.name;
         Debug.Log(elementNames);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }

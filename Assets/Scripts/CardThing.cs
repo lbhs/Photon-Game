@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CardThing : MonoBehaviour
 {
     public Camera cam;
-
     public List<GameObject> Cards;
-    public List<GameObject> CardsForIndex;
-
     public List<GameObject> FlippedCards;
-    public GameObject LineManager;
-
     public GameObject electron1;
     public GameObject electron2;
     public int CurrentLineNumber1;
@@ -56,12 +52,14 @@ public class CardThing : MonoBehaviour
             {
                 if (EligibleLines1.Contains(hit.collider.gameObject))
                 {
-                    electron1.transform.position = hit.collider.gameObject.transform.position;
+                    electron1.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
                     UpdateCurrentLine(hit.collider.gameObject, 1);
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -158)
+                    
+
+                    if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
                         red.Play();
@@ -100,16 +98,17 @@ public class CardThing : MonoBehaviour
                         violet.Play();
 
                     }
+
 
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
                 {
-                    electron2.transform.position = hit.collider.gameObject.transform.position;
+                    electron2.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
                     UpdateCurrentLine(hit.collider.gameObject, 2);
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -158)
+                    if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
                         red.Play();
@@ -148,6 +147,12 @@ public class CardThing : MonoBehaviour
                         Violet.SetActive(true);
                         violet.Play();
 
+                    }
+                    
+
+                    if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                    {
+                        SceneManager.LoadScene(3);
                     }
 
                 }
@@ -157,25 +162,25 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
-        var FirstCard = Cards[0];
-        Animation animation = FirstCard.GetComponentInChildren<Animation>();
-        animation.Play("yuhh");
-        var pos = FirstCard.transform.position;
-        FirstCard.transform.position = new Vector3(pos.x, pos.y, 0 - pos.z);
-        Cards.Remove(FirstCard);
-        FlippedCards.Add(FirstCard);
-
-        var currentcard = FlippedCards.Last();
-        var CardNumber = CardsForIndex.IndexOf(currentcard);
+        var CardNumber = Random.Range(0, 11);
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
-        foreach (GameObject line in EligibleLines1)
+
+        if (EligibleLines1.Count() == 0 && EligibleLines2.Count() == 0)
         {
-            UnityEngine.Debug.Log(line.name);
+            UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
+            FlipFirstCard();
         }
-        foreach (GameObject line in EligibleLines2)
+        else
         {
-            UnityEngine.Debug.Log(line.name);
+            foreach (GameObject card in FlippedCards)
+            {
+                var pos = card.transform.position;
+                card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
+            }
+            Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
+            newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
+            FlippedCards.Add(newcard.gameObject);
         }
     }
 
@@ -185,6 +190,11 @@ public class CardThing : MonoBehaviour
 
         foreach (GameObject line in Linelist)
         {
+            if (line == Linelist[CurrentLineNumber])
+            {
+                continue;
+            }
+
             int LineNumber = Linelist.IndexOf(line);
             var kJ2 = element.kJValues[LineNumber];
             var kJ1 = element.kJValues[CurrentLineNumber];
