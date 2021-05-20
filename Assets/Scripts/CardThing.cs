@@ -117,13 +117,11 @@ public class CardThing : MonoBehaviour
                     {
                         Violet.SetActive(true);
                     }
-                    
 
-                    if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
-                    {
-                        SceneManager.LoadScene(3);
-                    }
-
+                }
+                if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                {
+                    SceneManager.LoadScene(3);
                 }
             }
         }
