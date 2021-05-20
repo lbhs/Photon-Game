@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CardThing : MonoBehaviour
 {
@@ -48,6 +49,8 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
+                    
+
                     if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
@@ -77,6 +80,7 @@ public class CardThing : MonoBehaviour
                         Violet.SetActive(true);
                     }
 
+
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
                 {
@@ -85,7 +89,7 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -158)
+                    if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
                     }
@@ -112,6 +116,12 @@ public class CardThing : MonoBehaviour
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
+                    }
+                    
+
+                    if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                    {
+                        SceneManager.LoadScene(3);
                     }
 
                 }

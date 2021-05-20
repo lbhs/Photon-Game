@@ -24,6 +24,7 @@ public class initializeScreen : MonoBehaviour
     public Element Nitrogen;
     public string elementSelected = "Hydrogen";
 
+
     // Start is called before the first frame update
     void Start()
     {

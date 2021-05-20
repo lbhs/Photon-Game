@@ -9,6 +9,6 @@ public class ReturnToMenu : MonoBehaviour
 {
     public void returnToMenu()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(1);
     }
 }
