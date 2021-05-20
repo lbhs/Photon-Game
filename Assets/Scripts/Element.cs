@@ -7,20 +7,16 @@ public class Element : MonoBehaviour
 {
     // Defines Name of atom and the kJValues for the colorSet that the element emits
     public string elementName;
-    public List<string> colors;
-    public List<float> linePositions;
     public List<int> kJValues;
   
     
 
 
     // Defines the Element Object
-    public Element(string Name, List<string> colorSet, List<float> lines, List<int> kJ)
+    public Element(string Name, List<int> kJ)
     {
         elementName = Name;
-        linePositions = lines;
         kJValues = kJ;
-        colors = colorSet;
 
     }
 

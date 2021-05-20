@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class CardThing : MonoBehaviour
 {
@@ -24,6 +25,14 @@ public class CardThing : MonoBehaviour
     public GameObject Blue;
     public GameObject Indigo;
     public GameObject Violet;
+
+    public AudioSource red;
+    public AudioSource orange;
+    public AudioSource yellow;
+    public AudioSource green;
+    public AudioSource blue;
+    public AudioSource indigo;
+    public AudioSource violet;
 
     public void Start()
     {
@@ -48,34 +57,48 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
+                    
+
                     if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
+                        red.Play();
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
+                        orange.Play();
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
+                        yellow.Play();
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
+                        green.Play();
+
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
+                        blue.Play();
+
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
+                        indigo.Play();
+
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
+                        violet.Play();
+
                     }
+
 
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
@@ -85,35 +108,51 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -158)
+                    if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
+                        red.Play();
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
+                        orange.Play();
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
+                        yellow.Play();
+
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
+                        green.Play();
+
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
+                        blue.Play();
+
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
+                        indigo.Play();
+
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
+                        violet.Play();
+
                     }
 
+                }
+                if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                {
+                    SceneManager.LoadScene(3);
                 }
             }
         }
@@ -132,7 +171,7 @@ public class CardThing : MonoBehaviour
         }
         else
         {
-            foreach(GameObject card in FlippedCards)
+            foreach (GameObject card in FlippedCards)
             {
                 var pos = card.transform.position;
                 card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
