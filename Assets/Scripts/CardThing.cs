@@ -52,7 +52,7 @@ public class CardThing : MonoBehaviour
             {
                 if (EligibleLines1.Contains(hit.collider.gameObject))
                 {
-                    electron1.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
+                    electron1.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
                     UpdateCurrentLine(hit.collider.gameObject, 1);
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
@@ -103,7 +103,7 @@ public class CardThing : MonoBehaviour
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
                 {
-                    electron2.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
+                    electron2.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
                     UpdateCurrentLine(hit.collider.gameObject, 2);
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
@@ -164,7 +164,7 @@ public class CardThing : MonoBehaviour
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
 
-        if (EligibleLines1.Count() == 0 && EligibleLines2.Count() == 0)
+        if ((EligibleLines1.Count() == 0 && EligibleLines2.Count() == 0) || (CardNumber == Cards.IndexOf(FlippedCards.Last())))
         {
             UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
             FlipFirstCard();
