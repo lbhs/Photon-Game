@@ -20,7 +20,10 @@ public class initializeScreen : MonoBehaviour
     public Element Hydrogen;
     public Element Copper;
     public Element Oxygen;
+    public Element Sodium;
+    public Element Nitrogen;
     public string elementSelected = "Hydrogen";
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(string elementSelect)
     {
         elementSelect = selectElement.elementNames;
-        List<Element> elementList = new List<Element>{ Hydrogen, Copper, Oxygen };
+        List<Element> elementList = new List<Element>{ Hydrogen, Oxygen, Sodium };
         foreach (Element elementObject in elementList)
         {
             
@@ -44,6 +47,11 @@ public class initializeScreen : MonoBehaviour
                 {
                     chosenElement2 = Copper;
                 }
+                if (chosenElement.elementName == "Sodium")
+                {
+                    chosenElement2 = Nitrogen;
+                }
+
                 
             }
         }
@@ -65,19 +73,20 @@ public class initializeScreen : MonoBehaviour
   //          Debug.Log(chosenElement2.linePositions.IndexOf(i));
   //          levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
   //      }
+        
 
         foreach (GameObject level in levels)
         {
             var biggestkj = chosenElement.kJValues.Last();
-            var position = (biggestkj - chosenElement.kJValues[levels.IndexOf(level)]) * 6.6 / biggestkj;
-            level.transform.position = new Vector3(0, 6.6f - (float)position, 0);
+            var position = chosenElement.kJValues[levels.IndexOf(level)] * (levels[4].transform.position.y - levels[0].transform.position.y) / biggestkj;
+            level.transform.position = new Vector3(levels[0].transform.position.x, levels[0].transform.position.y + (float)position, 0);
         }
 
         foreach (GameObject level in levels2)
         {
             var biggestkj = chosenElement2.kJValues.Last();
-            var position = (biggestkj - chosenElement2.kJValues[levels2.IndexOf(level)]) * 6.6 / biggestkj;
-            level.transform.position = new Vector3(5.8f, 6.6f - (float)position, 0);
+            var position = chosenElement2.kJValues[levels2.IndexOf(level)] * (levels2[4].transform.position.y - levels2[0].transform.position.y) / biggestkj;
+            level.transform.position = new Vector3(levels2[0].transform.position.x, levels2[0].transform.position.y + (float)position, 0);
         }
 
         foreach (GameObject Line in Lines)
