@@ -164,7 +164,7 @@ public class CardThing : MonoBehaviour
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
 
-        if ((EligibleLines1.Count() == 0 && EligibleLines2.Count() == 0) || (CardNumber == Cards.IndexOf(FlippedCards.Last())))
+        if (((EligibleLines1.Count() + EligibleLines2.Count()) < 2) || (CardNumber == Cards.IndexOf(FlippedCards.Last())))
         {
             UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
             FlipFirstCard();
