@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CardThing : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class CardThing : MonoBehaviour
     public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
     public int LastCard;
+    public int pog;
+    public Text scoretext;
+    public float FadeSpeed;
 
     public GameObject Red;
     public GameObject Orange;
@@ -43,6 +47,7 @@ public class CardThing : MonoBehaviour
         CurrentLineNumber1 = 0;
         CurrentLineNumber2 = 0;
         LastCard = -1;
+        pog = -1;
     }
 
     public void Update()
@@ -75,7 +80,10 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    
+                    if (kj < 0)
+                    {
+                        StartCoroutine(Thing(1, kj));
+                    }
 
                     if (kj >= -210 && kj <= -150)
                     {
@@ -127,13 +135,13 @@ public class CardThing : MonoBehaviour
                     EligibleLines1.Clear();
                     if (CurrentLineNumber2 == 0)
                     {
-                        electron2.GetComponent<Animation>().Stop("wiggle");
+                        electron2.GetComponent<Animation>().Stop("wiggle 1");
 
                     }
                     else
                     {
-                        electron2.GetComponent<Animation>().Play("wiggle");
-                        electron2.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber2;
+                        electron2.GetComponent<Animation>().Play("wiggle 1");
+                        electron2.GetComponent<Animation>()["wiggle 1"].speed = .25f + .15f * CurrentLineNumber2;
                     }
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
@@ -190,32 +198,39 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
+        while (pog == -1)
+        {
+            pog = yuh();
+        }
+        var CardNumber = pog;
+        foreach (GameObject card in FlippedCards)
+        {
+            var pos = card.transform.position;
+            card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
+        }
+        Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
+        newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
+        FlippedCards.Add(newcard.gameObject);
+        LastCard = CardNumber;
+        pog = -1;
+    }
+
+    public int yuh()
+    {
         var CardNumber = Random.Range(0, 11);
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
-        var index = FlippedCards.Count();
-
         if ((EligibleLines1.Count() + EligibleLines2.Count()) < 2)
         {
-            UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
-            FlipFirstCard();
+            return -1;
         }
-        if (LastCard == CardNumber)
+        if (CardNumber == LastCard)
         {
-            UnityEngine.Debug.Log("repeat card");
-            FlipFirstCard();
+            return -1;
         }
         else
         {
-            foreach (GameObject card in FlippedCards)
-            {
-                var pos = card.transform.position;
-                card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
-            }
-            Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
-            newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
-            FlippedCards.Add(newcard.gameObject);
-            LastCard = CardNumber;
+            return CardNumber;
         }
     }
 
@@ -329,5 +344,26 @@ public class CardThing : MonoBehaviour
             }
         }
         return ReturnLines;
+    }
+
+    IEnumerator Thing(int wellnum, int kj)
+    {
+        UnityEngine.Debug.Log("doing thing");
+        if (wellnum == 1)
+        {
+            var pos = Camera.main.WorldToScreenPoint(electron1parent.transform.position);
+            scoretext.gameObject.transform.position = new Vector3(pos.x + 20, pos.y, pos.z);
+            scoretext.text = "" + kj;
+            while(scoretext.color.a >= 0)
+            {
+                var size = scoretext.fontSize + 2;
+                scoretext.fontSize = (int)size;
+                var a = scoretext.color.a - .05f;
+                scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                yield return new WaitForSecondsRealtime(.01f);
+            }
+            UnityEngine.Debug.Log("did things");
+        }
+        
     }
 }
