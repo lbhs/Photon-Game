@@ -14,6 +14,8 @@ public class initializeScreen : MonoBehaviour
     public Element chosenElement2;
     public List<GameObject> Lines;
     public List<GameObject> Lines2;
+    public List<GameObject> NLines;
+    public List<GameObject> NLines2;
     public Camera cam;
     public List<GameObject> lineLabels;
     public GameObject dropDown;
@@ -105,6 +107,19 @@ public class initializeScreen : MonoBehaviour
             var biggestkj = chosenElement2.kJValues.Last();
             var newkj = biggestkj - chosenElement2.kJValues[Lines2.IndexOf(Line)];
             Line.GetComponent<Text>().text = "-" + newkj + " kJ";
+        }
+
+        foreach (GameObject Line in NLines)
+        {
+
+            Line.transform.position = cam.WorldToScreenPoint(levels[NLines.IndexOf(Line)].transform.position + new Vector3(3.8f, 0, 0));
+
+        }
+
+        foreach (GameObject Line in NLines2)
+        {
+
+            Line.transform.position = cam.WorldToScreenPoint(levels2[NLines2.IndexOf(Line)].transform.position + new Vector3(3.8f, 0, 0));
         }
 
     }
