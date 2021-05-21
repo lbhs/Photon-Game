@@ -80,49 +80,50 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj < 0)
-                    {
-                        StartCoroutine(Thing(1, kj));
-                    }
-
                     if (kj >= -210 && kj <= -150)
                     {
                         Red.SetActive(true);
                         red.Play();
+                        StartCoroutine(Thing(1, kj, Color.red));
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
                         orange.Play();
+                        StartCoroutine(Thing(1, kj, new Color(1, .65f, 0)));
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
                         yellow.Play();
+                        StartCoroutine(Thing(1, kj, Color.yellow));
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
                         green.Play();
+                        StartCoroutine(Thing(1, kj, Color.green));
 
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
                         blue.Play();
+                        StartCoroutine(Thing(1, kj, Color.blue));
 
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
                         indigo.Play();
+                        StartCoroutine(Thing(1, kj, new Color(.3f, 0, .5f)));
 
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
                         violet.Play();
-
+                        StartCoroutine(Thing(1, kj, Color.magenta));
                     }
 
 
@@ -150,41 +151,46 @@ public class CardThing : MonoBehaviour
                     {
                         Red.SetActive(true);
                         red.Play();
+                        StartCoroutine(Thing(2, kj, Color.red));
                     }
                     if (kj >= -310 && kj <= -211)
                     {
                         Orange.SetActive(true);
                         orange.Play();
+                        StartCoroutine(Thing(2, kj, new Color(1, .65f, 0)));
                     }
                     if (kj >= -410 && kj <= -311)
                     {
                         Yellow.SetActive(true);
                         yellow.Play();
-
+                        StartCoroutine(Thing(2, kj, Color.yellow));
                     }
                     if (kj >= -510 && kj <= -411)
                     {
                         Green.SetActive(true);
                         green.Play();
+                        StartCoroutine(Thing(2, kj, Color.green));
 
                     }
                     if (kj >= -610 && kj <= -511)
                     {
                         Blue.SetActive(true);
                         blue.Play();
+                        StartCoroutine(Thing(2, kj, Color.blue));
 
                     }
                     if (kj >= -710 && kj <= -611)
                     {
                         Indigo.SetActive(true);
                         indigo.Play();
+                        StartCoroutine(Thing(2, kj, new Color(.3f, 0, .5f)));
 
                     }
                     if (kj >= -810 && kj <= -711)
                     {
                         Violet.SetActive(true);
                         violet.Play();
-
+                        StartCoroutine(Thing(2, kj, Color.magenta));
                     }
 
                 }
@@ -346,24 +352,78 @@ public class CardThing : MonoBehaviour
         return ReturnLines;
     }
 
-    IEnumerator Thing(int wellnum, int kj)
+    IEnumerator Thing(int wellnum, int kj, Color color)
     {
-        UnityEngine.Debug.Log("doing thing");
+        scoretext.color = color;
+        scoretext.fontSize = 14;
         if (wellnum == 1)
         {
             var pos = Camera.main.WorldToScreenPoint(electron1parent.transform.position);
-            scoretext.gameObject.transform.position = new Vector3(pos.x + 20, pos.y, pos.z);
+            var randomyuh = Random.Range(0, 2);
             scoretext.text = "" + kj;
-            while(scoretext.color.a >= 0)
+            if (randomyuh == 0)
             {
-                var size = scoretext.fontSize + 2;
-                scoretext.fontSize = (int)size;
-                var a = scoretext.color.a - .05f;
-                scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                yield return new WaitForSecondsRealtime(.01f);
+                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .05f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(5, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
             }
-            UnityEngine.Debug.Log("did things");
+            if (randomyuh == 1)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .05f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-5, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
         }
-        
+        if (wellnum == 2)
+        {
+            var pos = Camera.main.WorldToScreenPoint(electron2parent.transform.position);
+            var randomyuh = Random.Range(0, 2);
+            scoretext.text = "" + kj;
+            if (randomyuh == 0)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .05f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(5, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
+            if (randomyuh == 1)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .05f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-5, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
+        }
+
     }
 }
