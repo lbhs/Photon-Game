@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2103,6 +2103,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656817581}
   m_CullTransparentMesh: 0
+--- !u!1 &722791381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 722791382}
+  m_Layer: 0
+  m_Name: Electron1Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &722791382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722791381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1899996, y: -0.48, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 928050062}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &734940022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4482131653121754264, guid: b5a728e4062c39842bb215d3172db45f,
@@ -2153,8 +2184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Nitrogen
-  colors: []
-  linePositions: []
   kJValues: 000000007c01000058020000a8020000ee020000
 --- !u!1 &749599072
 GameObject:
@@ -2186,17 +2215,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Hydrogen
-  colors:
-  - Violet
-  - Cyan
-  - Blue
-  - Red
-  linePositions:
-  - 0
-  - 6.15
-  - 7.2875
-  - 7.6875
-  - 7.875
   kJValues: 00000000d403000089040000c8040000e6040000
 --- !u!4 &749599074
 Transform:
@@ -3048,6 +3066,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928050062}
   - component: {fileID: 928050061}
+  - component: {fileID: 928050063}
   m_Layer: 0
   m_Name: electron
   m_TagString: Untagged
@@ -3113,12 +3132,31 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 928050060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18999958, y: -0.48000002, z: -1}
+  m_LocalPosition: {x: 0, y: 0.035, z: 0}
   m_LocalScale: {x: 0.21954687, y: 0.21954687, z: 0.27443358}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 722791382}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &928050063
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928050060}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 50f8aaaaa2be01a47822ac32070dd7fb, type: 2}
+  m_Animations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 7400000, guid: 50f8aaaaa2be01a47822ac32070dd7fb, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &953113432
 GameObject:
   m_ObjectHideFlags: 0
@@ -4000,17 +4038,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Silver
-  colors:
-  - Red
-  - Red
-  - Red
-  - Red
-  linePositions:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
   kJValues: 00000000dc000000860100003002000002030000
 --- !u!1 &1216843395
 GameObject:
@@ -4759,17 +4786,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Oxygen
-  colors:
-  - Violet
-  - Green
-  - Blue
-  - Red
-  linePositions:
-  - 0
-  - 2
-  - 5
-  - 6
-  - 6.6
   kJValues: 000000009001000058020000ee02000020030000
 --- !u!4 &1377674069
 Transform:
@@ -4923,17 +4939,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Copper
-  colors:
-  - Red
-  - Red
-  - Red
-  - Red
-  linePositions:
-  - 0
-  - 4
-  - 5
-  - 6
-  - 6.6
   kJValues: 00000000c20100008a0200002003000084030000
 --- !u!1 &1414145978
 GameObject:
@@ -5017,6 +5022,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414145978}
   m_CullTransparentMesh: 0
+--- !u!1 &1446293648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446293649}
+  m_Layer: 0
+  m_Name: Electron2Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1446293649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446293648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.99, y: -0.48, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1593090846}
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450850327
 GameObject:
   m_ObjectHideFlags: 0
@@ -5561,12 +5597,15 @@ MonoBehaviour:
   - {fileID: 734940022}
   FlippedCards: []
   electron1: {fileID: 928050060}
+  electron1parent: {fileID: 722791381}
   electron2: {fileID: 1593090845}
+  electron2parent: {fileID: 1446293648}
   CurrentLineNumber1: 0
   CurrentLineNumber2: 0
   initScreen: {fileID: 1830344514}
   EligibleLines1: []
   EligibleLines2: []
+  LastCard: 0
   Red: {fileID: 1972736409}
   Orange: {fileID: 1851243011}
   Yellow: {fileID: 1377266111}
@@ -5591,6 +5630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1593090846}
   - component: {fileID: 1593090847}
+  - component: {fileID: 1593090848}
   m_Layer: 0
   m_Name: electron 2
   m_TagString: Untagged
@@ -5606,11 +5646,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593090845}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.99, y: -0.48000002, z: -1}
+  m_LocalPosition: {x: 0, y: 0.035, z: 0}
   m_LocalScale: {x: 0.21954401, y: 0.21954401, z: 0.27443}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_Father: {fileID: 1446293649}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1593090847
 SpriteRenderer:
@@ -5662,6 +5702,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &1593090848
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593090845}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 50f8aaaaa2be01a47822ac32070dd7fb, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 50f8aaaaa2be01a47822ac32070dd7fb, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1596559637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549,
@@ -7121,8 +7177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementName: Sodium
-  colors: []
-  linePositions: []
   kJValues: 0000000090010000da0200008403000024040000
 --- !u!1 &1966433001
 GameObject:

@@ -10,13 +10,16 @@ public class CardThing : MonoBehaviour
     public List<GameObject> Cards;
     public List<GameObject> FlippedCards;
     public GameObject electron1;
+    public GameObject electron1parent;
     public GameObject electron2;
+    public GameObject electron2parent;
     public int CurrentLineNumber1;
     public int CurrentLineNumber2;
     public initializeScreen initScreen;
     public List<GameObject> EligibleLines1;
     public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
+    public int LastCard;
 
     public GameObject Red;
     public GameObject Orange;
@@ -39,6 +42,7 @@ public class CardThing : MonoBehaviour
         kJDic = new Dictionary<GameObject, int>();
         CurrentLineNumber1 = 0;
         CurrentLineNumber2 = 0;
+        LastCard = -1;
     }
 
     public void Update()
@@ -52,8 +56,22 @@ public class CardThing : MonoBehaviour
             {
                 if (EligibleLines1.Contains(hit.collider.gameObject))
                 {
-                    electron1.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
-                    UpdateCurrentLine(hit.collider.gameObject, 1);
+                    electron1parent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
+                    CurrentLineNumber1 = initScreen.levels.IndexOf(hit.collider.gameObject);
+                    EligibleLines1.Clear();
+                    EligibleLines2.Clear();
+                    if (CurrentLineNumber1 == 0)
+                    {
+                        electron1.GetComponent<Animation>().Stop("wiggle");
+                        
+                    }
+                    else
+                    {
+                        electron1.GetComponent<Animation>().Play("wiggle");
+                        electron1.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber1;
+                    }
+
+
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
@@ -103,8 +121,20 @@ public class CardThing : MonoBehaviour
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
                 {
-                    electron2.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
-                    UpdateCurrentLine(hit.collider.gameObject, 2);
+                    electron2parent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
+                    CurrentLineNumber2 = initScreen.levels2.IndexOf(hit.collider.gameObject);
+                    EligibleLines2.Clear();
+                    EligibleLines1.Clear();
+                    if (CurrentLineNumber2 == 0)
+                    {
+                        electron2.GetComponent<Animation>().Stop("wiggle");
+
+                    }
+                    else
+                    {
+                        electron2.GetComponent<Animation>().Play("wiggle");
+                        electron2.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber2;
+                    }
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
@@ -163,10 +193,16 @@ public class CardThing : MonoBehaviour
         var CardNumber = Random.Range(0, 11);
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
+        var index = FlippedCards.Count();
 
-        if (((EligibleLines1.Count() + EligibleLines2.Count()) < 2) || (CardNumber == Cards.IndexOf(FlippedCards.Last())))
+        if ((EligibleLines1.Count() + EligibleLines2.Count()) < 2)
         {
             UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
+            FlipFirstCard();
+        }
+        if (LastCard == CardNumber)
+        {
+            UnityEngine.Debug.Log("repeat card");
             FlipFirstCard();
         }
         else
@@ -179,6 +215,7 @@ public class CardThing : MonoBehaviour
             Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
             newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
             FlippedCards.Add(newcard.gameObject);
+            LastCard = CardNumber;
         }
     }
 
@@ -293,21 +330,4 @@ public class CardThing : MonoBehaviour
         }
         return ReturnLines;
     }
-
-    public void UpdateCurrentLine(GameObject line, int number)
-    {
-        if (number == 1)
-        {
-            CurrentLineNumber1 = initScreen.levels.IndexOf(line);
-            UnityEngine.Debug.Log("Current Line1 = " + CurrentLineNumber1);
-        }
-        if (number == 2)
-        {
-            CurrentLineNumber2 = initScreen.levels2.IndexOf(line);
-            UnityEngine.Debug.Log("Current Line2 = " + CurrentLineNumber2);
-        }
-        EligibleLines1.Clear();
-        EligibleLines2.Clear();
-    }
-
 }
