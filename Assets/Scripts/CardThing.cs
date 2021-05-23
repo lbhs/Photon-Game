@@ -24,22 +24,25 @@ public class CardThing : MonoBehaviour
     public int pog;
     public Text scoretext;
     public float FadeSpeed;
+    public List<GameObject> CompletedColors;
 
-    public GameObject Red;
-    public GameObject Orange;
-    public GameObject Yellow;
-    public GameObject Green;
-    public GameObject Blue;
-    public GameObject Indigo;
-    public GameObject Violet;
+    public List<aColor> colorss;
 
-    public AudioSource red;
-    public AudioSource orange;
-    public AudioSource yellow;
-    public AudioSource green;
-    public AudioSource blue;
-    public AudioSource indigo;
-    public AudioSource violet;
+    [System.Serializable] public class aColor
+    {
+        public GameObject ColorObject;
+        public AudioSource ColorSound;
+        public List<int> ColorBounds;
+        public Color ActualColor;
+
+        public aColor(GameObject col, AudioSource sou, List<int> bou, Color act)
+        {
+            ColorObject = col;
+            ColorSound = sou;
+            ColorBounds = bou;
+            ActualColor = act;
+        }
+    }
 
     public void Start()
     {
@@ -76,56 +79,19 @@ public class CardThing : MonoBehaviour
                         electron1.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber1;
                     }
 
-
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -150)
+                    foreach(aColor col in colorss)
                     {
-                        Red.SetActive(true);
-                        red.Play();
-                        StartCoroutine(Thing(1, kj, Color.red));
+                        if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                        {
+                            col.ColorObject.SetActive(true);
+                            col.ColorSound.Play();
+                            CompletedColors.Add(col.ColorObject);
+                            StartCoroutine(Thing(1, kj, col.ActualColor));
+                        }
                     }
-                    if (kj >= -310 && kj <= -211)
-                    {
-                        Orange.SetActive(true);
-                        orange.Play();
-                        StartCoroutine(Thing(1, kj, new Color(1, .65f, 0)));
-                    }
-                    if (kj >= -410 && kj <= -311)
-                    {
-                        Yellow.SetActive(true);
-                        yellow.Play();
-                        StartCoroutine(Thing(1, kj, Color.yellow));
-                    }
-                    if (kj >= -510 && kj <= -411)
-                    {
-                        Green.SetActive(true);
-                        green.Play();
-                        StartCoroutine(Thing(1, kj, Color.green));
-
-                    }
-                    if (kj >= -610 && kj <= -511)
-                    {
-                        Blue.SetActive(true);
-                        blue.Play();
-                        StartCoroutine(Thing(1, kj, Color.blue));
-
-                    }
-                    if (kj >= -710 && kj <= -611)
-                    {
-                        Indigo.SetActive(true);
-                        indigo.Play();
-                        StartCoroutine(Thing(1, kj, new Color(.3f, 0, .5f)));
-
-                    }
-                    if (kj >= -810 && kj <= -711)
-                    {
-                        Violet.SetActive(true);
-                        violet.Play();
-                        StartCoroutine(Thing(1, kj, Color.magenta));
-                    }
-
 
                 }
                 if (EligibleLines2.Contains(hit.collider.gameObject))
@@ -147,54 +113,19 @@ public class CardThing : MonoBehaviour
                     var kj = kJDic[hit.collider.gameObject];
                     UnityEngine.Debug.Log(kj);
 
-                    if (kj >= -210 && kj <= -150)
+                    foreach (aColor col in colorss)
                     {
-                        Red.SetActive(true);
-                        red.Play();
-                        StartCoroutine(Thing(2, kj, Color.red));
-                    }
-                    if (kj >= -310 && kj <= -211)
-                    {
-                        Orange.SetActive(true);
-                        orange.Play();
-                        StartCoroutine(Thing(2, kj, new Color(1, .65f, 0)));
-                    }
-                    if (kj >= -410 && kj <= -311)
-                    {
-                        Yellow.SetActive(true);
-                        yellow.Play();
-                        StartCoroutine(Thing(2, kj, Color.yellow));
-                    }
-                    if (kj >= -510 && kj <= -411)
-                    {
-                        Green.SetActive(true);
-                        green.Play();
-                        StartCoroutine(Thing(2, kj, Color.green));
-
-                    }
-                    if (kj >= -610 && kj <= -511)
-                    {
-                        Blue.SetActive(true);
-                        blue.Play();
-                        StartCoroutine(Thing(2, kj, Color.blue));
-
-                    }
-                    if (kj >= -710 && kj <= -611)
-                    {
-                        Indigo.SetActive(true);
-                        indigo.Play();
-                        StartCoroutine(Thing(2, kj, new Color(.3f, 0, .5f)));
-
-                    }
-                    if (kj >= -810 && kj <= -711)
-                    {
-                        Violet.SetActive(true);
-                        violet.Play();
-                        StartCoroutine(Thing(2, kj, Color.magenta));
+                        if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                        {
+                            col.ColorObject.SetActive(true);
+                            col.ColorSound.Play();
+                            CompletedColors.Add(col.ColorObject);
+                            StartCoroutine(Thing(2, kj, col.ActualColor));
+                        }
                     }
 
                 }
-                if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                if(CompletedColors.Count() == 9)
                 {
                     SceneManager.LoadScene(3);
                 }
@@ -223,6 +154,18 @@ public class CardThing : MonoBehaviour
 
     public int yuh()
     {
+  //      if (Colors.Count() < 2)
+    //    {
+   //         foreach (GameObject line in initScreen.levels)
+  //          {
+  //              var kj = kJDic[line];
+  //              var colorboundlist = ColorDic[line];
+  //              if (kj > colorboundlist[0] && kj < colorboundlist[1])
+ //               {
+
+ //               }    
+    //        }
+      //  }
         var CardNumber = Random.Range(0, 11);
         EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
         EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
@@ -354,6 +297,7 @@ public class CardThing : MonoBehaviour
 
     IEnumerator Thing(int wellnum, int kj, Color color)
     {
+        UnityEngine.Debug.Log(color);
         scoretext.color = color;
         scoretext.fontSize = 14;
         if (wellnum == 1)
@@ -368,9 +312,9 @@ public class CardThing : MonoBehaviour
                 {
                     var size = scoretext.fontSize + 2;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .05f;
+                    var a = scoretext.color.a - .03f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(5, 2.5f, 0);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;
                     yield return new WaitForSecondsRealtime(.01f);
                 }
@@ -382,9 +326,9 @@ public class CardThing : MonoBehaviour
                 {
                     var size = scoretext.fontSize + 2;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .05f;
+                    var a = scoretext.color.a - .03f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(-5, 2.5f, 0);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;
                     yield return new WaitForSecondsRealtime(.01f);
                 }
@@ -402,9 +346,9 @@ public class CardThing : MonoBehaviour
                 {
                     var size = scoretext.fontSize + 2;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .05f;
+                    var a = scoretext.color.a - .03f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(5, 2.5f, 0);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;
                     yield return new WaitForSecondsRealtime(.01f);
                 }
@@ -416,9 +360,9 @@ public class CardThing : MonoBehaviour
                 {
                     var size = scoretext.fontSize + 2;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .05f;
+                    var a = scoretext.color.a - .03f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(-5, 2.5f, 0);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;
                     yield return new WaitForSecondsRealtime(.01f);
                 }
