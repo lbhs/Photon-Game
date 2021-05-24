@@ -10,6 +10,8 @@ public class Ai : MonoBehaviour
     public initializeScreen initScreen;
     public int CardNumber;
     public List<Card> CardsInOrder;
+    public List<GameObject> PosLines;
+    public Dictionary<GameObject, GameObject> LineCombos;
 
     [System.Serializable]
     public class Card
@@ -47,28 +49,43 @@ public class Ai : MonoBehaviour
         }
         if (card.CompletedColors.Count() >= 7)
         {
-            List<GameObject> PosLines = new List<GameObject>();
-            foreach (Well well in card.wells)
+            CalculatePosCards();
+            foreach(GameObject line in PosLines)
+            {
+                if (card.wells[0].CurrentLineNumber == card.wells[0].levellist.IndexOf(line))
+                {
+
+                }
+            }
+            foreach(Card c in CopyCardList)
+            {
+
+            }
+        }
+        return -1;
+    }
+
+    public void CalculatePosCards()
+    {
+        if(PosLines.Count() == 0)
+        {
+            foreach (CardThing.Well well in card.wells)
             {
                 foreach (GameObject line1 in well.levellist)
                 {
                     foreach (GameObject line2 in well.levellist)
                     {
-                        kj = well.element.kJValues[well.levellist.IndexOf(line1)] - well.element.kJValues[well.levellist.IndexOf(line2)];
-                        foreach (aColor col in card.colorss)
+                        var kj = well.element.kJValues[well.levellist.IndexOf(line1)] - well.element.kJValues[well.levellist.IndexOf(line2)];
+                        foreach (CardThing.aColor col in card.colorss)
                         {
-                            if (!card.CompletedColors.Contains(col) && (kj > col.ColorBounds[0] && kj < col.ColorBounds[1]))
+                            if (!card.CompletedColors.Contains(col.ColorObject) && (kj > col.ColorBounds[0] && kj < col.ColorBounds[1]))
                             {
                                 PosLines.Add(line1);
+                                LineCombos[line1] = line2;
                             }
                         }
                     }
                 }
-            }
-            if(card.wells[0].CurrentLineNumber == )
-            foreach(Card c in CopyCardList)
-            {
-
             }
         }
     }
