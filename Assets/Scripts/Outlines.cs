@@ -21,7 +21,7 @@ public class Outlines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var EligibleLines = CardManager.GetComponent<CardThing>().EligibleLines1;
+        var EligibleLines = CardManager.GetComponent<CardThing>().wells[0].EligibleLines;
 
         foreach (GameObject line in LineList)
         {
@@ -42,7 +42,7 @@ public class Outlines : MonoBehaviour
 
         }
 
-        var EligibleLines2 = CardManager.GetComponent<CardThing>().EligibleLines2;
+        var EligibleLines2 = CardManager.GetComponent<CardThing>().wells[1].EligibleLines;
 
         foreach (GameObject line in LineList2)
         {

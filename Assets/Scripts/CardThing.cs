@@ -3,42 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CardThing : MonoBehaviour
 {
     public Camera cam;
     public List<GameObject> Cards;
     public List<GameObject> FlippedCards;
-    public GameObject electron1;
-    public GameObject electron2;
-    public int CurrentLineNumber1;
-    public int CurrentLineNumber2;
     public initializeScreen initScreen;
-    public List<GameObject> EligibleLines1;
-    public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
+    public int LastCard;
+    public int pog;
+    public Text scoretext;
+    public float FadeSpeed;
+    public List<GameObject> CompletedColors;
 
-    public GameObject Red;
-    public GameObject Orange;
-    public GameObject Yellow;
-    public GameObject Green;
-    public GameObject Blue;
-    public GameObject Indigo;
-    public GameObject Violet;
+    public List<aColor> colorss;
+    public List<Well> wells;
 
-    public AudioSource red;
-    public AudioSource orange;
-    public AudioSource yellow;
-    public AudioSource green;
-    public AudioSource blue;
-    public AudioSource indigo;
-    public AudioSource violet;
+    [System.Serializable] public class aColor
+    {
+        public GameObject ColorObject;
+        public AudioSource ColorSound;
+        public List<int> ColorBounds;
+        public Color ActualColor;
+
+        public aColor(GameObject col, AudioSource sou, List<int> bou, Color act)
+        {
+            ColorObject = col;
+            ColorSound = sou;
+            ColorBounds = bou;
+            ActualColor = act;
+        }
+    }
+
+    [System.Serializable] public class Well
+    {
+        public GameObject electron;
+        public GameObject electronparent;
+        public int CurrentLineNumber;
+        public List<GameObject> EligibleLines;
+        public List<GameObject> levellist;
+        public Element element;
+    }
 
     public void Start()
     {
         kJDic = new Dictionary<GameObject, int>();
-        CurrentLineNumber1 = 0;
-        CurrentLineNumber2 = 0;
+        LastCard = -1;
+        pog = -1;
     }
 
     public void Update()
@@ -50,107 +63,41 @@ public class CardThing : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1000))
             {
-                if (EligibleLines1.Contains(hit.collider.gameObject))
+                foreach (Well well in wells)
                 {
-                    electron1.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
-                    UpdateCurrentLine(hit.collider.gameObject, 1);
-                    var kj = kJDic[hit.collider.gameObject];
-                    UnityEngine.Debug.Log(kj);
-
-                    
-
-                    if (kj >= -210 && kj <= -150)
+                    if (well.EligibleLines.Contains(hit.collider.gameObject))
                     {
-                        Red.SetActive(true);
-                        red.Play();
-                    }
-                    if (kj >= -310 && kj <= -211)
-                    {
-                        Orange.SetActive(true);
-                        orange.Play();
-                    }
-                    if (kj >= -410 && kj <= -311)
-                    {
-                        Yellow.SetActive(true);
-                        yellow.Play();
-                    }
-                    if (kj >= -510 && kj <= -411)
-                    {
-                        Green.SetActive(true);
-                        green.Play();
+                        well.electronparent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
+                        well.CurrentLineNumber = well.levellist.IndexOf(hit.collider.gameObject);
+                        foreach (Well wellz in wells)
+                        {
+                            wellz.EligibleLines.Clear();
+                        }
+                        if (well.CurrentLineNumber == 0)
+                        {
+                            well.electron.GetComponent<Animation>().Stop("wiggle");
+                        }
+                        else
+                        {
+                            well.electron.GetComponent<Animation>().Play("wiggle");
+                            well.electron.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * well.CurrentLineNumber;
+                        }
+                        var kj = kJDic[hit.collider.gameObject];
+                        UnityEngine.Debug.Log(kj);
 
+                        foreach (aColor col in colorss)
+                        {
+                            if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                            {
+                                col.ColorObject.SetActive(true);
+                                col.ColorSound.Play();
+                                CompletedColors.Add(col.ColorObject);
+                                StartCoroutine(Thing(well, kj, col.ActualColor));
+                            }
+                        }
                     }
-                    if (kj >= -610 && kj <= -511)
-                    {
-                        Blue.SetActive(true);
-                        blue.Play();
-
-                    }
-                    if (kj >= -710 && kj <= -611)
-                    {
-                        Indigo.SetActive(true);
-                        indigo.Play();
-
-                    }
-                    if (kj >= -810 && kj <= -711)
-                    {
-                        Violet.SetActive(true);
-                        violet.Play();
-
-                    }
-
-
                 }
-                if (EligibleLines2.Contains(hit.collider.gameObject))
-                {
-                    electron2.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y, hit.collider.gameObject.transform.position.z - 1);
-                    UpdateCurrentLine(hit.collider.gameObject, 2);
-                    var kj = kJDic[hit.collider.gameObject];
-                    UnityEngine.Debug.Log(kj);
-
-                    if (kj >= -210 && kj <= -150)
-                    {
-                        Red.SetActive(true);
-                        red.Play();
-                    }
-                    if (kj >= -310 && kj <= -211)
-                    {
-                        Orange.SetActive(true);
-                        orange.Play();
-                    }
-                    if (kj >= -410 && kj <= -311)
-                    {
-                        Yellow.SetActive(true);
-                        yellow.Play();
-
-                    }
-                    if (kj >= -510 && kj <= -411)
-                    {
-                        Green.SetActive(true);
-                        green.Play();
-
-                    }
-                    if (kj >= -610 && kj <= -511)
-                    {
-                        Blue.SetActive(true);
-                        blue.Play();
-
-                    }
-                    if (kj >= -710 && kj <= -611)
-                    {
-                        Indigo.SetActive(true);
-                        indigo.Play();
-
-                    }
-                    if (kj >= -810 && kj <= -711)
-                    {
-                        Violet.SetActive(true);
-                        violet.Play();
-
-                    }
-
-                }
-                if (Red.activeSelf == true && Orange.activeSelf == true && Yellow.activeSelf == true && Green.activeSelf == true && Blue.activeSelf == true && Indigo.activeSelf == true && Violet.activeSelf == true)
+                if(CompletedColors.Count() == 9)
                 {
                     SceneManager.LoadScene(3);
                 }
@@ -160,31 +107,71 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
-        var CardNumber = Random.Range(0, 11);
-        EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
-        EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
+        wells[0].element = initScreen.chosenElement;
+        wells[1].element = initScreen.chosenElement2;
+        wells[0].levellist = initScreen.levels;
+        wells[1].levellist = initScreen.levels2;
 
-        if (EligibleLines1.Count() == 0 && EligibleLines2.Count() == 0)
+        while (pog == -1)
         {
-            UnityEngine.Debug.Log("no possible lines for card " + CardNumber);
-            FlipFirstCard();
+            pog = yuh();
+        }
+        var CardNumber = pog;
+        foreach (GameObject card in FlippedCards)
+        {
+            var pos = card.transform.position;
+            card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
+        }
+        Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
+        newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
+        FlippedCards.Add(newcard.gameObject);
+        LastCard = CardNumber;
+        pog = -1;
+    }
+
+    public int yuh()
+    {
+        //      if (Colors.Count() < 2)
+        //    {
+        //         foreach (GameObject line in initScreen.levels)
+        //          {
+        //              var kj = kJDic[line];
+        //              var colorboundlist = ColorDic[line];
+        //              if (kj > colorboundlist[0] && kj < colorboundlist[1])
+        //               {
+
+        //               }    
+        //        }
+        //  }
+        var CardNumber = Random.Range(0, 11);
+        foreach (Well well in wells)
+        {
+            well.EligibleLines = CheckLines(well, CardNumber);
+            foreach (GameObject line in well.EligibleLines)
+            {
+                UnityEngine.Debug.Log(line.name);
+            }
+        }
+        if ((wells[0].EligibleLines.Count() + wells[1].EligibleLines.Count()) < 2)
+        {
+            return -1;
+        }
+        if (CardNumber == LastCard)
+        {
+            return -1;
         }
         else
         {
-            foreach (GameObject card in FlippedCards)
-            {
-                var pos = card.transform.position;
-                card.transform.position = new Vector3(pos.x, pos.y, pos.z + 1);
-            }
-            Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
-            newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
-            FlippedCards.Add(newcard.gameObject);
+            return CardNumber;
         }
     }
 
-    public List<GameObject> CheckLines(List<GameObject> Linelist, Element element, int CardNumber, int CurrentLineNumber)
+    public List<GameObject> CheckLines(Well well, int CardNumber)
     {
         List<GameObject> ReturnLines = new List<GameObject>();
+        var Linelist = well.levellist;
+        var element = well.element;
+        var CurrentLineNumber = well.CurrentLineNumber;
 
         foreach (GameObject line in Linelist)
         {
@@ -294,20 +281,41 @@ public class CardThing : MonoBehaviour
         return ReturnLines;
     }
 
-    public void UpdateCurrentLine(GameObject line, int number)
+    IEnumerator Thing(Well well, int kj, Color color)
     {
-        if (number == 1)
-        {
-            CurrentLineNumber1 = initScreen.levels.IndexOf(line);
-            UnityEngine.Debug.Log("Current Line1 = " + CurrentLineNumber1);
-        }
-        if (number == 2)
-        {
-            CurrentLineNumber2 = initScreen.levels2.IndexOf(line);
-            UnityEngine.Debug.Log("Current Line2 = " + CurrentLineNumber2);
-        }
-        EligibleLines1.Clear();
-        EligibleLines2.Clear();
-    }
+        scoretext.color = color;
+        scoretext.fontSize = 14;
 
+            var pos = Camera.main.WorldToScreenPoint(well.electronparent.transform.position);
+            var randomyuh = Random.Range(0, 2);
+            scoretext.text = "" + kj;
+            if (randomyuh == 0)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .03f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
+            if (randomyuh == 1)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .03f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
+    }
 }

@@ -62,8 +62,6 @@ public class initializeScreen : MonoBehaviour
     public void initScreen()
     {
         List<Material> colorsUsed = new List<Material>();
-        Debug.Log(chosenElement);
-        Debug.Log(chosenElement2);
  //       foreach (float i in chosenElement.linePositions)
   //      {
   //          Debug.Log(chosenElement.linePositions.IndexOf(i));
