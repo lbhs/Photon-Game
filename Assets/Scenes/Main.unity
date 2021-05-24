@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6963,15 +6963,7 @@ MonoBehaviour:
   - {fileID: 377828181}
   - {fileID: 734940022}
   FlippedCards: []
-  electron1: {fileID: 928050060}
-  electron1parent: {fileID: 1955793924}
-  electron2: {fileID: 1593090845}
-  electron2parent: {fileID: 72278037}
-  CurrentLineNumber1: 0
-  CurrentLineNumber2: 0
   initScreen: {fileID: 1830344514}
-  EligibleLines1: []
-  EligibleLines2: []
   LastCard: 0
   pog: 0
   scoretext: {fileID: 895280187}
