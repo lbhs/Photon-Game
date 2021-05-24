@@ -27,6 +27,7 @@ public class CardThing : MonoBehaviour
     public List<GameObject> CompletedColors;
 
     public List<aColor> colorss;
+    public List<Well> wells;
 
     [System.Serializable] public class aColor
     {
@@ -42,6 +43,16 @@ public class CardThing : MonoBehaviour
             ColorBounds = bou;
             ActualColor = act;
         }
+    }
+
+    [System.Serializable] public class Well
+    {
+        public GameObject electron;
+        public GameObject electronparent;
+        public int CurrentLineNumber;
+        public List<GameObject> EligibleLines;
+        public List<GameObject> levellist;
+        public Element element;
     }
 
     public void Start()
@@ -62,68 +73,39 @@ public class CardThing : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1000))
             {
-                if (EligibleLines1.Contains(hit.collider.gameObject))
+                foreach (Well well in wells)
                 {
-                    electron1parent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
-                    CurrentLineNumber1 = initScreen.levels.IndexOf(hit.collider.gameObject);
-                    EligibleLines1.Clear();
-                    EligibleLines2.Clear();
-                    if (CurrentLineNumber1 == 0)
+                    if (well.EligibleLines.Contains(hit.collider.gameObject))
                     {
-                        electron1.GetComponent<Animation>().Stop("wiggle");
-                        
-                    }
-                    else
-                    {
-                        electron1.GetComponent<Animation>().Play("wiggle");
-                        electron1.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber1;
-                    }
-
-                    var kj = kJDic[hit.collider.gameObject];
-                    UnityEngine.Debug.Log(kj);
-
-                    foreach(aColor col in colorss)
-                    {
-                        if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                        well.electronparent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
+                        well.CurrentLineNumber = well.levellist.IndexOf(hit.collider.gameObject);
+                        foreach (Well wellz in wells)
                         {
-                            col.ColorObject.SetActive(true);
-                            col.ColorSound.Play();
-                            CompletedColors.Add(col.ColorObject);
-                            StartCoroutine(Thing(1, kj, col.ActualColor));
+                            wellz.EligibleLines.Clear();
+                        }
+                        if (well.CurrentLineNumber == 0)
+                        {
+                            well.electron.GetComponent<Animation>().Stop("wiggle");
+                        }
+                        else
+                        {
+                            well.electron.GetComponent<Animation>().Play("wiggle");
+                            well.electron.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber1;
+                        }
+                        var kj = kJDic[hit.collider.gameObject];
+                        UnityEngine.Debug.Log(kj);
+
+                        foreach (aColor col in colorss)
+                        {
+                            if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                            {
+                                col.ColorObject.SetActive(true);
+                                col.ColorSound.Play();
+                                CompletedColors.Add(col.ColorObject);
+                                StartCoroutine(Thing(well, kj, col.ActualColor));
+                            }
                         }
                     }
-
-                }
-                if (EligibleLines2.Contains(hit.collider.gameObject))
-                {
-                    electron2parent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
-                    CurrentLineNumber2 = initScreen.levels2.IndexOf(hit.collider.gameObject);
-                    EligibleLines2.Clear();
-                    EligibleLines1.Clear();
-                    if (CurrentLineNumber2 == 0)
-                    {
-                        electron2.GetComponent<Animation>().Stop("wiggle 1");
-
-                    }
-                    else
-                    {
-                        electron2.GetComponent<Animation>().Play("wiggle 1");
-                        electron2.GetComponent<Animation>()["wiggle 1"].speed = .25f + .15f * CurrentLineNumber2;
-                    }
-                    var kj = kJDic[hit.collider.gameObject];
-                    UnityEngine.Debug.Log(kj);
-
-                    foreach (aColor col in colorss)
-                    {
-                        if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
-                        {
-                            col.ColorObject.SetActive(true);
-                            col.ColorSound.Play();
-                            CompletedColors.Add(col.ColorObject);
-                            StartCoroutine(Thing(2, kj, col.ActualColor));
-                        }
-                    }
-
                 }
                 if(CompletedColors.Count() == 9)
                 {
@@ -135,6 +117,11 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
+        wells[0].element = initScreen.chosenElement;
+        wells[1].element = initScreen.chosenElement2;
+        wells[0].levellist = initScreen.levels;
+        wells[1].levellist = initScreen.levels2;
+
         while (pog == -1)
         {
             pog = yuh();
@@ -154,22 +141,28 @@ public class CardThing : MonoBehaviour
 
     public int yuh()
     {
-  //      if (Colors.Count() < 2)
-    //    {
-   //         foreach (GameObject line in initScreen.levels)
-  //          {
-  //              var kj = kJDic[line];
-  //              var colorboundlist = ColorDic[line];
-  //              if (kj > colorboundlist[0] && kj < colorboundlist[1])
- //               {
+        //      if (Colors.Count() < 2)
+        //    {
+        //         foreach (GameObject line in initScreen.levels)
+        //          {
+        //              var kj = kJDic[line];
+        //              var colorboundlist = ColorDic[line];
+        //              if (kj > colorboundlist[0] && kj < colorboundlist[1])
+        //               {
 
- //               }    
-    //        }
-      //  }
+        //               }    
+        //        }
+        //  }
         var CardNumber = Random.Range(0, 11);
-        EligibleLines1 = CheckLines(initScreen.levels, initScreen.chosenElement, CardNumber, CurrentLineNumber1);
-        EligibleLines2 = CheckLines(initScreen.levels2, initScreen.chosenElement2, CardNumber, CurrentLineNumber2);
-        if ((EligibleLines1.Count() + EligibleLines2.Count()) < 2)
+        foreach (Well well in wells)
+        {
+            well.EligibleLines = CheckLines(well.levellist, well.element, CardNumber, well.CurrentLineNumber);
+            foreach (GameObject line in well.EligibleLines)
+            {
+                UnityEngine.Debug.Log(line.name);
+            }
+        }
+        if ((wells[0].EligibleLines.Count() + wells[1].EligibleLines.Count()) < 2)
         {
             return -1;
         }
@@ -295,79 +288,41 @@ public class CardThing : MonoBehaviour
         return ReturnLines;
     }
 
-    IEnumerator Thing(int wellnum, int kj, Color color)
+    IEnumerator Thing(Well well, int kj, Color color)
     {
-        UnityEngine.Debug.Log(color);
         scoretext.color = color;
         scoretext.fontSize = 14;
-        if (wellnum == 1)
-        {
-            var pos = Camera.main.WorldToScreenPoint(electron1parent.transform.position);
-            var randomyuh = Random.Range(0, 2);
-            scoretext.text = "" + kj;
-            if (randomyuh == 0)
-            {
-                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
-                while (scoretext.color.a >= 0)
-                {
-                    var size = scoretext.fontSize + 2;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
-                }
-            }
-            if (randomyuh == 1)
-            {
-                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
-                while (scoretext.color.a >= 0)
-                {
-                    var size = scoretext.fontSize + 2;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
-                }
-            }
-        }
-        if (wellnum == 2)
-        {
-            var pos = Camera.main.WorldToScreenPoint(electron2parent.transform.position);
-            var randomyuh = Random.Range(0, 2);
-            scoretext.text = "" + kj;
-            if (randomyuh == 0)
-            {
-                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
-                while (scoretext.color.a >= 0)
-                {
-                    var size = scoretext.fontSize + 2;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
-                }
-            }
-            if (randomyuh == 1)
-            {
-                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
-                while (scoretext.color.a >= 0)
-                {
-                    var size = scoretext.fontSize + 2;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
-                }
-            }
-        }
 
+            var pos = Camera.main.WorldToScreenPoint(well.electronparent.transform.position);
+            var randomyuh = Random.Range(0, 2);
+            scoretext.text = "" + kj;
+            if (randomyuh == 0)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .03f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
+            if (randomyuh == 1)
+            {
+                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
+                while (scoretext.color.a >= 0)
+                {
+                    var size = scoretext.fontSize + 2;
+                    scoretext.fontSize = (int)size;
+                    var a = scoretext.color.a - .03f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
+                    scoretext.gameObject.transform.position = newpos;
+                    yield return new WaitForSecondsRealtime(.01f);
+                }
+            }
     }
 }

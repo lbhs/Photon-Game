@@ -7014,6 +7014,19 @@ MonoBehaviour:
     ColorSound: {fileID: 1093375477}
     ColorBounds: 2a030000e8030000
     ActualColor: {r: 0.8980392, g: 0.36862746, b: 0.88235295, a: 1}
+  wells:
+  - electron: {fileID: 928050060}
+    electronparent: {fileID: 1955793924}
+    CurrentLineNumber: 0
+    EligibleLines: []
+    levellist: []
+    element: {fileID: 0}
+  - electron: {fileID: 1593090845}
+    electronparent: {fileID: 72278037}
+    CurrentLineNumber: 0
+    EligibleLines: []
+    levellist: []
+    element: {fileID: 0}
 --- !u!1 &1593090845
 GameObject:
   m_ObjectHideFlags: 0
