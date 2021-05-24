@@ -10,15 +10,7 @@ public class CardThing : MonoBehaviour
     public Camera cam;
     public List<GameObject> Cards;
     public List<GameObject> FlippedCards;
-    public GameObject electron1;
-    public GameObject electron1parent;
-    public GameObject electron2;
-    public GameObject electron2parent;
-    public int CurrentLineNumber1;
-    public int CurrentLineNumber2;
     public initializeScreen initScreen;
-    public List<GameObject> EligibleLines1;
-    public List<GameObject> EligibleLines2;
     public Dictionary<GameObject, int> kJDic;
     public int LastCard;
     public int pog;
@@ -58,8 +50,6 @@ public class CardThing : MonoBehaviour
     public void Start()
     {
         kJDic = new Dictionary<GameObject, int>();
-        CurrentLineNumber1 = 0;
-        CurrentLineNumber2 = 0;
         LastCard = -1;
         pog = -1;
     }
@@ -90,7 +80,7 @@ public class CardThing : MonoBehaviour
                         else
                         {
                             well.electron.GetComponent<Animation>().Play("wiggle");
-                            well.electron.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * CurrentLineNumber1;
+                            well.electron.GetComponent<Animation>()["wiggle"].speed = .25f + .15f * well.CurrentLineNumber;
                         }
                         var kj = kJDic[hit.collider.gameObject];
                         UnityEngine.Debug.Log(kj);
@@ -156,7 +146,7 @@ public class CardThing : MonoBehaviour
         var CardNumber = Random.Range(0, 11);
         foreach (Well well in wells)
         {
-            well.EligibleLines = CheckLines(well.levellist, well.element, CardNumber, well.CurrentLineNumber);
+            well.EligibleLines = CheckLines(well, CardNumber);
             foreach (GameObject line in well.EligibleLines)
             {
                 UnityEngine.Debug.Log(line.name);
@@ -176,9 +166,12 @@ public class CardThing : MonoBehaviour
         }
     }
 
-    public List<GameObject> CheckLines(List<GameObject> Linelist, Element element, int CardNumber, int CurrentLineNumber)
+    public List<GameObject> CheckLines(Well well, int CardNumber)
     {
         List<GameObject> ReturnLines = new List<GameObject>();
+        var Linelist = well.levellist;
+        var element = well.element;
+        var CurrentLineNumber = well.CurrentLineNumber;
 
         foreach (GameObject line in Linelist)
         {
