@@ -15,8 +15,8 @@ public class CardThing : MonoBehaviour
     public int LastCard;
     public int pog;
     public Text scoretext;
-    public float FadeSpeed;
     public List<GameObject> CompletedColors;
+    public Ai ai;
 
     public List<aColor> colorss;
     public List<Well> wells;
@@ -109,14 +109,14 @@ public class CardThing : MonoBehaviour
     {
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
-        wells[0].levellist = initScreen.levels;
-        wells[1].levellist = initScreen.levels2;
 
-        while (pog == -1)
-        {
-            pog = yuh();
-        }
-        var CardNumber = pog;
+        //      while (pog == -1)
+        //       {
+        //          pog = yuh();
+        //     }
+        //    var CardNumber = pog;
+        var CardNumber = ai.PickACard();
+
         foreach (GameObject card in FlippedCards)
         {
             var pos = card.transform.position;
@@ -131,26 +131,10 @@ public class CardThing : MonoBehaviour
 
     public int yuh()
     {
-        //      if (Colors.Count() < 2)
-        //    {
-        //         foreach (GameObject line in initScreen.levels)
-        //          {
-        //              var kj = kJDic[line];
-        //              var colorboundlist = ColorDic[line];
-        //              if (kj > colorboundlist[0] && kj < colorboundlist[1])
-        //               {
-
-        //               }    
-        //        }
-        //  }
         var CardNumber = Random.Range(0, 11);
         foreach (Well well in wells)
         {
             well.EligibleLines = CheckLines(well, CardNumber);
-            foreach (GameObject line in well.EligibleLines)
-            {
-                UnityEngine.Debug.Log(line.name);
-            }
         }
         if ((wells[0].EligibleLines.Count() + wells[1].EligibleLines.Count()) < 2)
         {
@@ -294,9 +278,9 @@ public class CardThing : MonoBehaviour
                 scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
                 while (scoretext.color.a >= 0)
                 {
-                    var size = scoretext.fontSize + 2;
+                    var size = scoretext.fontSize + 1;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
+                    var a = scoretext.color.a - .0000001f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
                     var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;
@@ -308,9 +292,9 @@ public class CardThing : MonoBehaviour
                 scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
                 while (scoretext.color.a >= 0)
                 {
-                    var size = scoretext.fontSize + 2;
+                    var size = scoretext.fontSize + 1;
                     scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .03f;
+                    var a = scoretext.color.a - .000001f;
                     scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
                     var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
                     scoretext.gameObject.transform.position = newpos;

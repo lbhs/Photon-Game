@@ -2161,7 +2161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 653686202}
   - component: {fileID: 653686204}
-  - component: {fileID: 653686203}
   m_Layer: 0
   m_Name: well 2
   m_TagString: Untagged
@@ -2183,18 +2182,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &653686203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 653686201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adebca5b6989a4792980ac850fcd23fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &653686204
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3493,8 +3480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 542.5, y: -4.3}
-  m_SizeDelta: {x: 173.02014, y: 58.650253}
+  m_AnchoredPosition: {x: 627.39, y: -131}
+  m_SizeDelta: {x: 544.7868, y: 327.86438}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &895280187
 MonoBehaviour:
@@ -4682,7 +4669,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1090655040}
   - component: {fileID: 1090655039}
-  - component: {fileID: 1090655041}
   - component: {fileID: 1090655042}
   m_Layer: 0
   m_Name: well
@@ -4755,18 +4741,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1090655041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090655038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adebca5b6989a4792980ac850fcd23fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1090655042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6905,6 +6879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570739007}
   - component: {fileID: 1570739008}
+  - component: {fileID: 1570739006}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -6912,6 +6887,45 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1570739006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570739005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575c9d9f60dc99c4f98af84eefcf7b55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardThingScript: {fileID: 1570739008}
+  initScreen: {fileID: 1830344514}
+  CardNumber: 0
+  CardsInOrder:
+  - CardObject: {fileID: 2670633073016323923, guid: 47c3a7ed72437a846b60b74f8b5d6781,
+      type: 3}
+  - CardObject: {fileID: 8551778431804015756, guid: 5ce8e8668db785547b8b16e4be64f312,
+      type: 3}
+  - CardObject: {fileID: 944207635432871678, guid: ded78c464788438408bdf3a049e3b2f3,
+      type: 3}
+  - CardObject: {fileID: 3374190192505162390, guid: 384b47759e135d54e938161bd3037338,
+      type: 3}
+  - CardObject: {fileID: 8564134748008974064, guid: 5b7b0c8f5b2ae5b408f913daba4fbce1,
+      type: 3}
+  - CardObject: {fileID: 7671340915468949657, guid: 01aa1beaff5775e42800865cf3116f7a,
+      type: 3}
+  - CardObject: {fileID: 8120080793003576259, guid: d3f2ed36336e59945b38354d277b2549,
+      type: 3}
+  - CardObject: {fileID: 6307849885966577000, guid: 7023d3bfb09d4b7428f2f5380da2ea08,
+      type: 3}
+  - CardObject: {fileID: 3550220156776139053, guid: cd35bebb5b75aa94e89153118ddad814,
+      type: 3}
+  - CardObject: {fileID: 4482131653121754264, guid: b5a728e4062c39842bb215d3172db45f,
+      type: 3}
+  - CardObject: {fileID: 8920848182066185860, guid: 68a7dece782551c4e894ca8594fe893a,
+      type: 3}
+  PossibleLines: []
 --- !u!4 &1570739007
 Transform:
   m_ObjectHideFlags: 0
@@ -6963,20 +6977,12 @@ MonoBehaviour:
   - {fileID: 377828181}
   - {fileID: 734940022}
   FlippedCards: []
-  electron1: {fileID: 928050060}
-  electron1parent: {fileID: 1955793924}
-  electron2: {fileID: 1593090845}
-  electron2parent: {fileID: 72278037}
-  CurrentLineNumber1: 0
-  CurrentLineNumber2: 0
   initScreen: {fileID: 1830344514}
-  EligibleLines1: []
-  EligibleLines2: []
   LastCard: 0
   pog: 0
   scoretext: {fileID: 895280187}
-  FadeSpeed: 0.001
   CompletedColors: []
+  ai: {fileID: 1570739006}
   colorss:
   - ColorObject: {fileID: 903207529}
     ColorSound: {fileID: 887512791}
@@ -7019,13 +7025,23 @@ MonoBehaviour:
     electronparent: {fileID: 1955793924}
     CurrentLineNumber: 0
     EligibleLines: []
-    levellist: []
+    levellist:
+    - {fileID: 424219976}
+    - {fileID: 1977851095}
+    - {fileID: 1618100600}
+    - {fileID: 1966433001}
+    - {fileID: 30422418}
     element: {fileID: 0}
   - electron: {fileID: 1593090845}
     electronparent: {fileID: 72278037}
     CurrentLineNumber: 0
     EligibleLines: []
-    levellist: []
+    levellist:
+    - {fileID: 581735522}
+    - {fileID: 997015404}
+    - {fileID: 1282542844}
+    - {fileID: 856491081}
+    - {fileID: 958103601}
     element: {fileID: 0}
 --- !u!1 &1593090845
 GameObject:
