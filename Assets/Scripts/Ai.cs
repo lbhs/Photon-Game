@@ -9,23 +9,21 @@ public class Ai : MonoBehaviour
     public CardThing CardThingScript;
     public initializeScreen initScreen;
     public int CardNumber;
-    public List<Card> CardsInOrder;
+    public List<GameObject> SortedCards;
+    public List<GameObject> CardsInOrder;
     public List<GameObject> PossibleLines;
     public Dictionary<GameObject, GameObject> LineCombos;
 
-    [System.Serializable]
-    public class Card
+    public void Start()
     {
-   //     public List<int> kJBounds;
- //       public int targetline;
-        public GameObject CardObject;
+        CardsInOrder = new List<GameObject>(CardThingScript.Cards);
     }
 
     public int PickACard()
     {
-        List<Card> CopyCardList = new List<Card>();
-        CopyCardList = CardsInOrder;
+        List<GameObject> CopyCardList = new List<GameObject>(SortedCards);
         CardNumber = -1;
+
         /* This function will pick a card by filtering the list of cards through a 
          * few parameters and also by accounting for certain situations. The initial parameters 
          * remove cards from the list of possible cards, the latter parameters pick a card from
@@ -36,17 +34,19 @@ public class Ai : MonoBehaviour
         /* Go through all the cards and remove the ones that are a repeat of the last card
          * or only create 0 or 1 possible moves */
 
-        foreach(Card c in CardsInOrder)
+        foreach(GameObject c in SortedCards)
         {
             if((CardsInOrder.IndexOf(c)) == CardThingScript.LastCard)
             {
                 CopyCardList.Remove(c);
+                UnityEngine.Debug.Log("removed " + c.name + " because it was a repeat");
             }
             var yuh = CardThingScript.CheckLines(CardThingScript.wells[0], CardsInOrder.IndexOf(c));
             var yuh2 = CardThingScript.CheckLines(CardThingScript.wells[1], CardsInOrder.IndexOf(c));
             if ( (yuh.Count() + yuh2.Count()) < 2)
             {
                 CopyCardList.Remove(c);
+                UnityEngine.Debug.Log("removed " + c.name + " because it had less than 2 possible moves");
             }
         }
 
@@ -55,11 +55,13 @@ public class Ai : MonoBehaviour
          * if the electrons are at the bottom */
         if ((CardThingScript.wells[0].CurrentLineNumber + CardThingScript.wells[1].CurrentLineNumber) >= 6)
         {
-            CardNumber = Random.Range(0, (int)Mathf.Ceil((CopyCardList.Count() / 2)));
+            CardNumber = Random.Range(0, (int)(CopyCardList.Count() / 2));
+            UnityEngine.Debug.Log("Electrons were near the top so I picked: " + CopyCardList[CardNumber].name);
         }
         if ((CardThingScript.wells[0].CurrentLineNumber + CardThingScript.wells[1].CurrentLineNumber) <= 2)
         {
-            CardNumber = Random.Range((int)Mathf.Floor(CopyCardList.Count() / 2), CopyCardList.Count());
+            CardNumber = Random.Range((int)(CopyCardList.Count() / 2), CopyCardList.Count());
+            UnityEngine.Debug.Log("Electrons were near the bottom so I picked: " + CopyCardList[CardNumber].name);
         }
 
         /* If there are 2 or less colors left, this part of the function will pick a card that either has
@@ -68,6 +70,8 @@ public class Ai : MonoBehaviour
 
         if (CardThingScript.CompletedColors.Count() >= 7)
         {
+            UnityEngine.Debug.Log("Less than two colors left...");
+
             CalculatePossibleLines();
 
             /* This part calls the CheckPossibleLinesAgainstCurrentLines function, and if it returns a card,
@@ -77,14 +81,14 @@ public class Ai : MonoBehaviour
             var returncard = CheckPossibleLinesAgainstCurrentLines(CopyCardList);
             if (returncard != null)
             {
-                CardNumber = CardsInOrder.IndexOf(returncard);
+                CardNumber = SortedCards.IndexOf(returncard);
             }
             else
             {
                 var otherreturncard = PickACardToGetToPossibleLine(CopyCardList);
                 if (otherreturncard != null)
                 {
-                    CardNumber = CardsInOrder.IndexOf(otherreturncard);
+                    CardNumber = SortedCards.IndexOf(otherreturncard);
                 }
             }
         }
@@ -94,8 +98,10 @@ public class Ai : MonoBehaviour
         if(CardNumber == -1)
         {
             CardNumber = CopyCardList.IndexOf(CopyCardList[Random.Range(0, CopyCardList.Count())]);
+            UnityEngine.Debug.Log("Picked a random card: " + CopyCardList[CardNumber].name);
         }
-        return CardNumber;
+        UnityEngine.Debug.Log("Final result: " + CopyCardList[CardNumber].name);
+        return CardsInOrder.IndexOf(CopyCardList[CardNumber]);
     }
 
     public void CalculatePossibleLines()
@@ -131,7 +137,7 @@ public class Ai : MonoBehaviour
         }
     }
 
-    public Card CheckPossibleLinesAgainstCurrentLines(List<Card> CopyCardList)
+    public GameObject CheckPossibleLinesAgainstCurrentLines(List<GameObject> CopyCardList)
     {
         /* This function is designed to check each turn if any of the lines in PossibleLines
          * are one of the current lines that an electron is on. If so, it figures out
@@ -141,13 +147,13 @@ public class Ai : MonoBehaviour
          * chooses one of the cards from the dictionary associated with it, and returns that Card */
 
         List<GameObject> PossibleLinesThatAreCurrentLines = new List<GameObject>();
-        Dictionary<GameObject, List<Card>> LineCardOptions = new Dictionary<GameObject, List<Card>>();
+        Dictionary<GameObject, List<GameObject>> LineCardOptions = new Dictionary<GameObject, List<GameObject>>();
         foreach (GameObject line in PossibleLines)
         {
-            List<Card> PossibleCards = new List<Card>();
+            List<GameObject> PossibleCards = new List<GameObject>();
             if (CardThingScript.wells[0].CurrentLineNumber == CardThingScript.wells[0].levellist.IndexOf(line))
             {
-                foreach (Card c in CopyCardList)
+                foreach (GameObject c in CopyCardList)
                 {
                     var yuh = (CardThingScript.CheckLines(CardThingScript.wells[0], CardsInOrder.IndexOf(c)));
                     if (yuh.Contains(LineCombos[line]))
@@ -160,7 +166,7 @@ public class Ai : MonoBehaviour
             }
             if (CardThingScript.wells[1].CurrentLineNumber == CardThingScript.wells[1].levellist.IndexOf(line))
             {
-                foreach (Card c in CopyCardList)
+                foreach (GameObject c in CopyCardList)
                 {
                     var yuh = (CardThingScript.CheckLines(CardThingScript.wells[1], CardsInOrder.IndexOf(c)));
                     if (yuh.Contains(LineCombos[line]))
@@ -184,14 +190,14 @@ public class Ai : MonoBehaviour
         }
     }
 
-    public Card PickACardToGetToPossibleLine(List<Card> CopyCardList)
+    public GameObject PickACardToGetToPossibleLine(List<GameObject> CopyCardList)
     {
         /* This function picks a card randomly that makes it possible to get to one of the PossibleLines */
 
-        List<Card> PossibleCards = new List<Card>();
+        List<GameObject> PossibleCards = new List<GameObject>();
         foreach (GameObject line in PossibleLines)
         {
-            foreach (Card c in CopyCardList)
+            foreach (GameObject c in CopyCardList)
             {
                 var yuh = (CardThingScript.CheckLines(CardThingScript.wells[0], CardsInOrder.IndexOf(c)));
                 var yuh2 = (CardThingScript.CheckLines(CardThingScript.wells[1], CardsInOrder.IndexOf(c)));

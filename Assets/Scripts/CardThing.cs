@@ -13,7 +13,6 @@ public class CardThing : MonoBehaviour
     public initializeScreen initScreen;
     public Dictionary<GameObject, int> kJDic;
     public int LastCard;
-    public int pog;
     public Text scoretext;
     public List<GameObject> CompletedColors;
     public Ai ai;
@@ -51,7 +50,6 @@ public class CardThing : MonoBehaviour
     {
         kJDic = new Dictionary<GameObject, int>();
         LastCard = -1;
-        pog = -1;
     }
 
     public void Update()
@@ -110,12 +108,12 @@ public class CardThing : MonoBehaviour
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
 
-        //      while (pog == -1)
-        //       {
-        //          pog = yuh();
-        //     }
-        //    var CardNumber = pog;
         var CardNumber = ai.PickACard();
+
+        foreach (Well well in wells)
+        {
+            well.EligibleLines = CheckLines(well, CardNumber);
+        }
 
         foreach (GameObject card in FlippedCards)
         {
@@ -126,28 +124,6 @@ public class CardThing : MonoBehaviour
         newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
         FlippedCards.Add(newcard.gameObject);
         LastCard = CardNumber;
-        pog = -1;
-    }
-
-    public int yuh()
-    {
-        var CardNumber = Random.Range(0, 11);
-        foreach (Well well in wells)
-        {
-            well.EligibleLines = CheckLines(well, CardNumber);
-        }
-        if ((wells[0].EligibleLines.Count() + wells[1].EligibleLines.Count()) < 2)
-        {
-            return -1;
-        }
-        if (CardNumber == LastCard)
-        {
-            return -1;
-        }
-        else
-        {
-            return CardNumber;
-        }
     }
 
     public List<GameObject> CheckLines(Well well, int CardNumber)
@@ -275,30 +251,44 @@ public class CardThing : MonoBehaviour
             scoretext.text = "" + kj;
             if (randomyuh == 0)
             {
-                scoretext.gameObject.transform.position = new Vector3(pos.x + 30, pos.y, pos.z);
+                scoretext.gameObject.transform.position = new Vector3(pos.x + 50, pos.y - 70, pos.z);
                 while (scoretext.color.a >= 0)
                 {
-                    var size = scoretext.fontSize + 1;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .0000001f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
+                    while(scoretext.fontSize < 50)
+                    {
+                        var size = scoretext.fontSize + 1;
+                        scoretext.fontSize = (int)size;
+                        var a = scoretext.color.a - .01f;
+                        scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                        var newpos = scoretext.gameObject.transform.position + new Vector3(1f, 1f, 0);
+                        scoretext.gameObject.transform.position = newpos;
+                        yield return new WaitForSecondsRealtime(.015f);
+                    }
+                    
+                    var a2 = scoretext.color.a - .01f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a2);
+                    yield return new WaitForSecondsRealtime(.03f);
                 }
             }
             if (randomyuh == 1)
             {
-                scoretext.gameObject.transform.position = new Vector3(pos.x - 30, pos.y, pos.z);
+                scoretext.gameObject.transform.position = new Vector3(pos.x - 50, pos.y - 70, pos.z);
                 while (scoretext.color.a >= 0)
                 {
-                    var size = scoretext.fontSize + 1;
-                    scoretext.fontSize = (int)size;
-                    var a = scoretext.color.a - .000001f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                    var newpos = scoretext.gameObject.transform.position + new Vector3(-3, 2.5f, 0);
-                    scoretext.gameObject.transform.position = newpos;
-                    yield return new WaitForSecondsRealtime(.01f);
+                    while(scoretext.fontSize < 50)
+                    {
+                        var size = scoretext.fontSize + 1;
+                        scoretext.fontSize = (int)size;
+                        var a = scoretext.color.a - .01f;
+                        scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
+                        var newpos = scoretext.gameObject.transform.position + new Vector3(-1f, 1f, 0);
+                        scoretext.gameObject.transform.position = newpos;
+                        yield return new WaitForSecondsRealtime(.015f);
+                    }
+                    
+                    var a2 = scoretext.color.a - .01f;
+                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a2);
+                    yield return new WaitForSecondsRealtime(.03f);
                 }
             }
     }
