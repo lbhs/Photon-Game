@@ -93,11 +93,14 @@ public class CardThing : MonoBehaviour
 
                         foreach (aColor col in colorss)
                         {
-                            if (-kj > col.ColorBounds[0] && -kj < col.ColorBounds[1])
+                            if (-kj >= col.ColorBounds[0] && -kj < col.ColorBounds[1])
                             {
                                 col.ColorObject.SetActive(true);
                                 col.ColorSound.Play();
-                                CompletedColors.Add(col.ColorObject);
+                                if (!CompletedColors.Contains(col.ColorObject))
+                                {
+                                    CompletedColors.Add(col.ColorObject);
+                                }
                                 StartCoroutine(Thing(well, kj, col.ActualColor));
                             }
                         }

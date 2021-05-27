@@ -7021,39 +7021,39 @@ MonoBehaviour:
   colorss:
   - ColorObject: {fileID: 903207529}
     ColorSound: {fileID: 887512791}
-    ColorBounds: 0000000096000000
+    ColorBounds: 000000009e000000
     ActualColor: {r: 0.34901962, g: 0.16470589, b: 0.11372549, a: 1}
   - ColorObject: {fileID: 1972736409}
     ColorSound: {fileID: 240776730}
-    ColorBounds: 96000000d2000000
+    ColorBounds: 9e000000be000000
     ActualColor: {r: 1, g: 0, b: 0, a: 1}
   - ColorObject: {fileID: 1851243011}
     ColorSound: {fileID: 1601097723}
-    ColorBounds: d300000036010000
+    ColorBounds: be000000c9000000
     ActualColor: {r: 0.972549, g: 0.5921569, b: 0.043137256, a: 1}
   - ColorObject: {fileID: 1377266111}
     ColorSound: {fileID: 1456038806}
-    ColorBounds: 370100009a010000
+    ColorBounds: c9000000d2000000
     ActualColor: {r: 0.972549, g: 0.8980392, b: 0, a: 1}
   - ColorObject: {fileID: 1396697732}
     ColorSound: {fileID: 1450850329}
-    ColorBounds: 9b010000fe010000
+    ColorBounds: d2000000ee000000
     ActualColor: {r: 0.40784314, g: 0.9529412, b: 0.03137255, a: 1}
   - ColorObject: {fileID: 337235826}
     ColorSound: {fileID: 93873978}
-    ColorBounds: ff01000062020000
+    ColorBounds: ee000000f5000000
     ActualColor: {r: 0, g: 0.8392157, b: 1, a: 1}
   - ColorObject: {fileID: 897650073}
     ColorSound: {fileID: 913925903}
-    ColorBounds: 63020000c6020000
+    ColorBounds: f500000008010000
     ActualColor: {r: 0.050980393, g: 0.14509805, b: 0.972549, a: 1}
   - ColorObject: {fileID: 1713017294}
     ColorSound: {fileID: 1491969499}
-    ColorBounds: c70200002a030000
+    ColorBounds: 0801000038010000
     ActualColor: {r: 0.8, g: 0.6901961, b: 0.95686275, a: 1}
   - ColorObject: {fileID: 759225090}
     ColorSound: {fileID: 1093375477}
-    ColorBounds: 2a030000e8030000
+    ColorBounds: 38010000e8030000
     ActualColor: {r: 0.8980392, g: 0.36862746, b: 0.88235295, a: 1}
   wells:
   - electron: {fileID: 928050060}
