@@ -13,7 +13,9 @@ public class CardThing : MonoBehaviour
     public initializeScreen initScreen;
     public Dictionary<GameObject, int> kJDic;
     public int LastCard;
-    public Text scoretext;
+    public Text LosingEnergyText;
+    public Text GainingEnergyText;
+    public Button button;
     public List<GameObject> CompletedColors;
     public Ai ai;
 
@@ -82,6 +84,10 @@ public class CardThing : MonoBehaviour
                         }
                         var kj = kJDic[hit.collider.gameObject];
                         UnityEngine.Debug.Log(kj);
+                        if(kj > 0)
+                        {
+                            StartCoroutine(IncreaseEnergyAnimation(well, kj, hit.collider.gameObject));
+                        }
 
                         foreach (aColor col in colorss)
                         {
@@ -243,53 +249,66 @@ public class CardThing : MonoBehaviour
 
     IEnumerator Thing(Well well, int kj, Color color)
     {
-        scoretext.color = color;
-        scoretext.fontSize = 14;
+        LosingEnergyText.color = color;
+        LosingEnergyText.fontSize = 5;
 
             var pos = Camera.main.WorldToScreenPoint(well.electronparent.transform.position);
             var randomyuh = Random.Range(0, 2);
-            scoretext.text = "" + kj;
+            LosingEnergyText.text = "" + kj;
             if (randomyuh == 0)
             {
-                scoretext.gameObject.transform.position = new Vector3(pos.x + 50, pos.y - 70, pos.z);
-                while (scoretext.color.a >= 0)
+                LosingEnergyText.gameObject.transform.position = new Vector3(pos.x + 50, pos.y - 70, pos.z);
+                while (LosingEnergyText.color.a >= 0)
                 {
-                    while(scoretext.fontSize < 50)
-                    {
-                        var size = scoretext.fontSize + 1;
-                        scoretext.fontSize = (int)size;
-                        var a = scoretext.color.a - .01f;
-                        scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                        var newpos = scoretext.gameObject.transform.position + new Vector3(1f, 1f, 0);
-                        scoretext.gameObject.transform.position = newpos;
-                        yield return new WaitForSecondsRealtime(.015f);
-                    }
-                    
-                    var a2 = scoretext.color.a - .01f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a2);
-                    yield return new WaitForSecondsRealtime(.03f);
+                        var size = LosingEnergyText.fontSize + 1;
+                        LosingEnergyText.fontSize = (int)size;
+                        var a = LosingEnergyText.color.a - .012f;
+                        LosingEnergyText.color = new Color(LosingEnergyText.color.r, LosingEnergyText.color.g, LosingEnergyText.color.b, a);
+                        var newpos = LosingEnergyText.gameObject.transform.position + new Vector3(1.3f, 1f, 0);
+                        LosingEnergyText.gameObject.transform.position = newpos;
+                        yield return new WaitForSecondsRealtime(.01f);
                 }
             }
             if (randomyuh == 1)
             {
-                scoretext.gameObject.transform.position = new Vector3(pos.x - 50, pos.y - 70, pos.z);
-                while (scoretext.color.a >= 0)
+                LosingEnergyText.gameObject.transform.position = new Vector3(pos.x - 50, pos.y - 70, pos.z);
+                while (LosingEnergyText.color.a >= 0)
                 {
-                    while(scoretext.fontSize < 50)
-                    {
-                        var size = scoretext.fontSize + 1;
-                        scoretext.fontSize = (int)size;
-                        var a = scoretext.color.a - .01f;
-                        scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a);
-                        var newpos = scoretext.gameObject.transform.position + new Vector3(-1f, 1f, 0);
-                        scoretext.gameObject.transform.position = newpos;
-                        yield return new WaitForSecondsRealtime(.015f);
-                    }
-                    
-                    var a2 = scoretext.color.a - .01f;
-                    scoretext.color = new Color(scoretext.color.r, scoretext.color.g, scoretext.color.b, a2);
-                    yield return new WaitForSecondsRealtime(.03f);
+                        var size = LosingEnergyText.fontSize + 1;
+                        LosingEnergyText.fontSize = (int)size;
+                        var a = LosingEnergyText.color.a - .012f;
+                        LosingEnergyText.color = new Color(LosingEnergyText.color.r, LosingEnergyText.color.g, LosingEnergyText.color.b, a);
+                        var newpos = LosingEnergyText.gameObject.transform.position + new Vector3(-1.3f, 1f, 0);
+                        LosingEnergyText.gameObject.transform.position = newpos;
+                        yield return new WaitForSecondsRealtime(.01f);
                 }
             }
+    }
+
+    IEnumerator IncreaseEnergyAnimation(Well well, int kj, GameObject line)
+    {
+        GainingEnergyText.color = new Color(1, 1, 1, 1);
+        GainingEnergyText.fontSize = 40;
+        GainingEnergyText.text = "+" + kj;
+        UnityEngine.Debug.Log("starting coroutine");
+        Vector3 start = button.gameObject.transform.position + new Vector3(250, 0, 0);
+        float timepassed = 0;
+
+        while (timepassed < 1f)
+        {
+            float t = timepassed / 1f;
+            float t2 = t * t;
+            float t3 = 1f - Mathf.Cos(t * Mathf.PI * 0.5f);
+            var x = Mathf.Lerp(start.x, cam.WorldToScreenPoint(line.transform.position).x + 50, t);
+            var y = Mathf.Lerp(start.y, cam.WorldToScreenPoint(line.transform.position).y - 40, t2);
+            GainingEnergyText.gameObject.transform.position = new Vector3(x, y, 0);
+            GainingEnergyText.fontSize = (int)Mathf.Lerp(30, 10, t);
+            GainingEnergyText.color = Color.Lerp(new Color(1, 1, 1, 1), new Color(1, 1, 1, .2f), t3);
+            timepassed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        GainingEnergyText.color = new Color(1, 1, 1, 0);
     }
 }
