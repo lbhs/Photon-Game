@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2531,51 +2531,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1768991356}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &742973225
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 742973226}
-  - component: {fileID: 742973227}
-  m_Layer: 0
-  m_Name: Nitrogen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &742973226
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742973225}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 953113433}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &742973227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742973225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elementName: Nitrogen
-  kJValues: 000000007c01000058020000a8020000ee020000
 --- !u!1 &749599072
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,7 +4003,6 @@ Transform:
   - {fileID: 1397295767}
   - {fileID: 1211292638}
   - {fileID: 1940341133}
-  - {fileID: 742973226}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5136,7 +5090,7 @@ GameObject:
   - component: {fileID: 1211292638}
   - component: {fileID: 1211292639}
   m_Layer: 0
-  m_Name: Silver
+  m_Name: A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5168,8 +5122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementName: Silver
-  kJValues: 00000000dc000000860100003002000002030000
+  elementName: A
+  kJValues: 00000000c80000002c0100004a01000068010000
 --- !u!1 &1216843395
 GameObject:
   m_ObjectHideFlags: 0
@@ -8377,8 +8331,8 @@ MonoBehaviour:
   Hydrogen: {fileID: 749599073}
   X: {fileID: 1377674068}
   Y: {fileID: 1397295768}
-  Sodium: {fileID: 1940341134}
-  Nitrogen: {fileID: 742973227}
+  A: {fileID: 1211292639}
+  B: {fileID: 1940341134}
   elementSelected: 
 --- !u!4 &1830344515
 Transform:
@@ -8745,7 +8699,7 @@ GameObject:
   - component: {fileID: 1940341133}
   - component: {fileID: 1940341134}
   m_Layer: 0
-  m_Name: Sodium
+  m_Name: B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8777,8 +8731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementName: Sodium
-  kJValues: 0000000090010000da0200008403000024040000
+  elementName: B
+  kJValues: 00000000c8000000dc000000f0000000fa000000
 --- !u!1 &1940985925
 GameObject:
   m_ObjectHideFlags: 0
