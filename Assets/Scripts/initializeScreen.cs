@@ -17,11 +17,12 @@ public class initializeScreen : MonoBehaviour
     public List<GameObject> NLines;
     public List<GameObject> NLines2;
     public Camera cam;
-    public List<GameObject> lineLabels;
     public GameObject dropDown;
+    public Text wellTitle1;
+    public Text wellTitle2;
     public Element Hydrogen;
-    public Element Copper;
-    public Element Oxygen;
+    public Element X;
+    public Element Y;
     public Element Sodium;
     public Element Nitrogen;
     public string elementSelected = "Hydrogen";
@@ -38,42 +39,45 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(string elementSelect)
     {
         elementSelect = selectElement.elementNames;
-        List<Element> elementList = new List<Element>{ Hydrogen, Oxygen, Sodium };
+        List<Element> elementList = new List<Element>{ Hydrogen, X, Sodium };
         foreach (Element elementObject in elementList)
         {
-            
+
             if (elementSelect == elementObject.elementName)
             {
                 chosenElement = elementObject;
-                if (chosenElement.elementName == "Oxygen")
+                if (chosenElement.elementName == "X")
                 {
-                    chosenElement2 = Copper;
+                    chosenElement2 = Y;
                 }
                 if (chosenElement.elementName == "Sodium")
                 {
                     chosenElement2 = Nitrogen;
                 }
 
-                
             }
+
+
         }
     }
 
     public void initScreen()
     {
         List<Material> colorsUsed = new List<Material>();
- //       foreach (float i in chosenElement.linePositions)
-  //      {
-  //          Debug.Log(chosenElement.linePositions.IndexOf(i));
-  //          levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
- //       }
+        wellTitle1.text = "Element " + chosenElement.elementName;
+        wellTitle2.text = "Element " + chosenElement2.elementName;
+        //       foreach (float i in chosenElement.linePositions)
+        //      {
+        //          Debug.Log(chosenElement.linePositions.IndexOf(i));
+        //          levels[chosenElement.linePositions.IndexOf(i)].transform.position = new Vector3(0, i, 0);
+        //       }
 
-  //      foreach (float i in chosenElement2.linePositions)
-  //      {
-  //          Debug.Log(chosenElement2.linePositions.IndexOf(i));
-  //          levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
-  //      }
-        
+        //      foreach (float i in chosenElement2.linePositions)
+        //      {
+        //          Debug.Log(chosenElement2.linePositions.IndexOf(i));
+        //          levels2[chosenElement2.linePositions.IndexOf(i)].transform.position = new Vector3(5.8f, i, 0);
+        //      }
+
 
         foreach (GameObject level in levels)
         {

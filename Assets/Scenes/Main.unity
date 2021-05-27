@@ -5980,7 +5980,7 @@ GameObject:
   - component: {fileID: 1377674069}
   - component: {fileID: 1377674068}
   m_Layer: 0
-  m_Name: Oxygen
+  m_Name: X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5998,8 +5998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementName: Oxygen
-  kJValues: 000000009001000058020000ee02000020030000
+  elementName: X
+  kJValues: 00000000c800000054010000b8010000f4010000
 --- !u!4 &1377674069
 Transform:
   m_ObjectHideFlags: 0
@@ -6119,7 +6119,7 @@ GameObject:
   - component: {fileID: 1397295767}
   - component: {fileID: 1397295768}
   m_Layer: 0
-  m_Name: Copper
+  m_Name: Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6151,8 +6151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba8018c8006b41817973f2b05d531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementName: Copper
-  kJValues: 00000000c20100008a0200002003000084030000
+  elementName: Y
+  kJValues: 00000000ff0000007c010000cc010000ea010000
 --- !u!1 &1414145978
 GameObject:
   m_ObjectHideFlags: 0
@@ -8370,11 +8370,12 @@ MonoBehaviour:
   - {fileID: 1940985925}
   - {fileID: 1526281567}
   cam: {fileID: 483147730}
-  lineLabels: []
   dropDown: {fileID: 0}
+  wellTitle1: {fileID: 787716896}
+  wellTitle2: {fileID: 1219015207}
   Hydrogen: {fileID: 749599073}
-  Copper: {fileID: 1397295768}
-  Oxygen: {fileID: 1377674068}
+  X: {fileID: 1377674068}
+  Y: {fileID: 1397295768}
   Sodium: {fileID: 1940341134}
   Nitrogen: {fileID: 742973227}
   elementSelected: 
