@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 121437919}
   - component: {fileID: 121437918}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: card sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -701,15 +701,15 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 92844fef458ab41eeae33c458d851fd8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.62
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 34
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -799,7 +799,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125596336
 GameObject:
@@ -3042,7 +3042,7 @@ Transform:
   m_LocalScale: {x: 0.27005944, y: 1, z: 0.3071956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 31
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &845089198
 PrefabInstance:
@@ -3523,7 +3523,7 @@ Transform:
   m_LocalScale: {x: 0.27005944, y: 1, z: 0.3071956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &895280185
 GameObject:
@@ -4658,7 +4658,7 @@ Transform:
   m_LocalScale: {x: 0.27005944, y: 1, z: 0.3071956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059645310
 GameObject:
@@ -7124,6 +7124,7 @@ MonoBehaviour:
     - {fileID: 856491081}
     - {fileID: 958103601}
     element: {fileID: 0}
+  cardSound: {fileID: 121437918}
 --- !u!1 &1593090845
 GameObject:
   m_ObjectHideFlags: 0
@@ -8222,7 +8223,7 @@ Transform:
   m_LocalScale: {x: 0.27005944, y: 1, z: 0.3071956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1821922380
 PrefabInstance:
@@ -8731,7 +8732,7 @@ Transform:
   m_LocalScale: {x: 0.27005944, y: 1, z: 0.3071956}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1940341132
 GameObject:

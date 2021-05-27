@@ -17,6 +17,7 @@ public class Ai : MonoBehaviour
     public void Start()
     {
         CardsInOrder = new List<GameObject>(CardThingScript.Cards);
+        LineCombos = new Dictionary<GameObject, GameObject>();
     }
 
     public int PickACard()
@@ -39,14 +40,12 @@ public class Ai : MonoBehaviour
             if((CardsInOrder.IndexOf(c)) == CardThingScript.LastCard)
             {
                 CopyCardList.Remove(c);
-                UnityEngine.Debug.Log("removed " + c.name + " because it was a repeat");
             }
             var yuh = CardThingScript.CheckLines(CardThingScript.wells[0], CardsInOrder.IndexOf(c));
             var yuh2 = CardThingScript.CheckLines(CardThingScript.wells[1], CardsInOrder.IndexOf(c));
             if ( (yuh.Count() + yuh2.Count()) < 2)
             {
                 CopyCardList.Remove(c);
-                UnityEngine.Debug.Log("removed " + c.name + " because it had less than 2 possible moves");
             }
         }
 
@@ -56,12 +55,12 @@ public class Ai : MonoBehaviour
         if ((CardThingScript.wells[0].CurrentLineNumber + CardThingScript.wells[1].CurrentLineNumber) >= 6)
         {
             CardNumber = Random.Range(0, (int)(CopyCardList.Count() / 2));
-            UnityEngine.Debug.Log("Electrons were near the top so I picked: " + CopyCardList[CardNumber].name);
+            UnityEngine.Debug.Log("AI - Electrons were near the top so I picked: " + CopyCardList[CardNumber].name);
         }
         if ((CardThingScript.wells[0].CurrentLineNumber + CardThingScript.wells[1].CurrentLineNumber) <= 2)
         {
             CardNumber = Random.Range((int)(CopyCardList.Count() / 2), CopyCardList.Count());
-            UnityEngine.Debug.Log("Electrons were near the bottom so I picked: " + CopyCardList[CardNumber].name);
+            UnityEngine.Debug.Log("AI - Electrons were near the bottom so I picked: " + CopyCardList[CardNumber].name);
         }
 
         /* If there are 2 or less colors left, this part of the function will pick a card that either has
@@ -70,7 +69,6 @@ public class Ai : MonoBehaviour
 
         if (CardThingScript.CompletedColors.Count() >= 7)
         {
-            UnityEngine.Debug.Log("Less than two colors left...");
 
             CalculatePossibleLines();
 
@@ -81,14 +79,16 @@ public class Ai : MonoBehaviour
             var returncard = CheckPossibleLinesAgainstCurrentLines(CopyCardList);
             if (returncard != null)
             {
-                CardNumber = SortedCards.IndexOf(returncard);
+                CardNumber = CopyCardList.IndexOf(returncard);
+                UnityEngine.Debug.Log("AI - Possible line was current line so I picked: " + CopyCardList[CardNumber].name);
             }
             else
             {
                 var otherreturncard = PickACardToGetToPossibleLine(CopyCardList);
                 if (otherreturncard != null)
                 {
-                    CardNumber = SortedCards.IndexOf(otherreturncard);
+                    CardNumber = CopyCardList.IndexOf(otherreturncard);
+                    UnityEngine.Debug.Log("AI - I picked: " + CopyCardList[CardNumber].name + " to get to a possible line");
                 }
             }
         }
@@ -98,9 +98,9 @@ public class Ai : MonoBehaviour
         if(CardNumber == -1)
         {
             CardNumber = CopyCardList.IndexOf(CopyCardList[Random.Range(0, CopyCardList.Count())]);
-            UnityEngine.Debug.Log("Picked a random card: " + CopyCardList[CardNumber].name);
+            UnityEngine.Debug.Log("AI - Picked a random card: " + CopyCardList[CardNumber].name);
         }
-        UnityEngine.Debug.Log("Final result: " + CopyCardList[CardNumber].name);
+        UnityEngine.Debug.Log("AI - Final result: " + CopyCardList[CardNumber].name);
         return CardsInOrder.IndexOf(CopyCardList[CardNumber]);
     }
 
@@ -128,7 +128,9 @@ public class Ai : MonoBehaviour
                             if (!CardThingScript.CompletedColors.Contains(col.ColorObject) && (kj > col.ColorBounds[0] && kj < col.ColorBounds[1]))
                             {
                                 PossibleLines.Add(line1);
-                                LineCombos[line1] = line2;
+                                UnityEngine.Debug.Log("line 1: " + line1.name);
+                                UnityEngine.Debug.Log("line 2: " + line2.name);
+                                LineCombos.Add(line1, line2);
                             }
                         }
                     }
@@ -161,7 +163,7 @@ public class Ai : MonoBehaviour
                         PossibleCards.Add(c);
                     }
                 }
-                LineCardOptions[line] = PossibleCards;
+                LineCardOptions.Add(line, PossibleCards);
                 PossibleLinesThatAreCurrentLines.Add(line);
             }
             if (CardThingScript.wells[1].CurrentLineNumber == CardThingScript.wells[1].levellist.IndexOf(line))
@@ -174,15 +176,16 @@ public class Ai : MonoBehaviour
                         PossibleCards.Add(c);
                     }
                 }
-                LineCardOptions[line] = PossibleCards;
+                LineCardOptions.Add(line, PossibleCards);
                 PossibleLinesThatAreCurrentLines.Add(line);
             }
         }
         if (PossibleLinesThatAreCurrentLines.Count() != 0)
         {
             var index = Random.Range(0, PossibleLinesThatAreCurrentLines.Count());
-            var index2 = Random.Range(0, LineCardOptions[PossibleLinesThatAreCurrentLines[index]].Count());
-            return LineCardOptions[PossibleLinesThatAreCurrentLines[index]][index2];
+            var pickedcardset = LineCardOptions[PossibleLinesThatAreCurrentLines[index]];
+            var index2 = Random.Range(0, pickedcardset.Count());
+            return pickedcardset[index2];
         }
         else
         {

@@ -22,6 +22,8 @@ public class CardThing : MonoBehaviour
     public List<aColor> colorss;
     public List<Well> wells;
 
+    public AudioSource cardSound;
+
     [System.Serializable] public class aColor
     {
         public GameObject ColorObject;
@@ -111,15 +113,18 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
+        Debug.Log("CT - Flipping...");
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
 
         var CardNumber = ai.PickACard();
+        Debug.Log("CT - Recieved card " + (CardNumber + 1) + " from AI");
 
         foreach (Well well in wells)
         {
             well.EligibleLines = CheckLines(well, CardNumber);
         }
+        Debug.Log("CT - Created Eligible Lines");
 
         foreach (GameObject card in FlippedCards)
         {
@@ -128,8 +133,10 @@ public class CardThing : MonoBehaviour
         }
         Transform newcard = Instantiate(Cards[CardNumber].transform, new Vector3(-6, 1, 0), new Quaternion(0, 0, 0, 0), this.transform);
         newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
+        Debug.Log("CT - Created and flipped new cad");
         FlippedCards.Add(newcard.gameObject);
         LastCard = CardNumber;
+        cardSound.Play(); 
     }
 
     public List<GameObject> CheckLines(Well well, int CardNumber)
