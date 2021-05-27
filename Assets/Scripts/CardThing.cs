@@ -22,6 +22,8 @@ public class CardThing : MonoBehaviour
     public List<aColor> colorss;
     public List<Well> wells;
 
+    public AudioSource cardSound;
+
     [System.Serializable] public class aColor
     {
         public GameObject ColorObject;
@@ -130,6 +132,7 @@ public class CardThing : MonoBehaviour
         newcard.gameObject.GetComponentInChildren<Animation>().Play("yuhh");
         FlippedCards.Add(newcard.gameObject);
         LastCard = CardNumber;
+        cardSound.Play(); 
     }
 
     public List<GameObject> CheckLines(Well well, int CardNumber)
