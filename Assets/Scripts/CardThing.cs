@@ -286,6 +286,7 @@ public class CardThing : MonoBehaviour
                         yield return new WaitForSecondsRealtime(.01f);
                 }
             }
+        LosingEnergyText.gameObject.transform.position = new Vector3(672.2f, -14.216f, 0);
     }
 
     IEnumerator IncreaseEnergyAnimation(Well well, int kj, GameObject line)
@@ -312,10 +313,5 @@ public class CardThing : MonoBehaviour
         }
 
         GainingEnergyText.color = new Color(1, 1, 1, 0);
-    }
-
-    public void Clicked()
-    {
-        Debug.Log("clicked");
     }
 }
