@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1028,7 +1028,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Violet
 
-    711-810
+    265 - 312
 
     kj/mol'
 --- !u!222 &185855347
@@ -1605,7 +1605,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Orange
 
-    211-310
+    191 - 201
 
     kj/mol'
 --- !u!222 &322913692
@@ -2040,7 +2040,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Yellow
 
-    311-410
+    202 - 210
 
     kj/mol'
 --- !u!222 &548721208
@@ -5195,7 +5195,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Red
 
-    150-210
+    158 - 190
 
     kj/mol'
 --- !u!222 &1216843398
@@ -6178,7 +6178,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Green
 
-    411-510
+    211 - 238
 
     kj/mol'
 --- !u!222 &1414145981
@@ -6260,7 +6260,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Infrared
 
-    <150
+    <158
 
     kj/mol'
 --- !u!222 &1434023400
@@ -6729,7 +6729,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Blue
 
-    511-610
+    239 - 245
 
     kj/mol'
 --- !u!222 &1526100361
@@ -7904,7 +7904,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'UViolet
 
-    810<
+    312<
 
     kj/mol'
 --- !u!222 &1694186334
@@ -8582,7 +8582,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Indigo
 
-    611-710
+    246 - 264
 
     kj/mol'
 --- !u!222 &1859736063
