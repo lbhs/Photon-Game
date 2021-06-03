@@ -82,8 +82,6 @@ public class CardThing : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            
-
             if (Physics.Raycast(ray, out hit, 1000))
             {
                 
@@ -147,7 +145,6 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
-        
         if (selectElement.elementNames == "Hydrogen")
         {
             if (tutorialCounter == 1)
@@ -164,15 +161,28 @@ public class CardThing : MonoBehaviour
                 tText3.gameObject.SetActive(true);
                 tutorialCounter += 1;
             }
-            
-            
-
         }
 
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
 
-        var CardNumber = ai.PickACard();
+        var CardNumber = -1;
+
+        if (selectElement.elementNames != "Hydrogen")
+        {
+            CardNumber = ai.PickACard();
+        }
+        else
+        {
+            if (tutorialCounter == 1)
+            {
+                CardNumber = 4;
+            }
+            if (tutorialCounter == 2)
+            {
+                return;
+            }
+        }
 
         foreach (Well well in wells)
         {
