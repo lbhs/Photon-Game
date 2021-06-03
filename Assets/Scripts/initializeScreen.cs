@@ -25,6 +25,8 @@ public class initializeScreen : MonoBehaviour
     public Element Y;
     public Element A;
     public Element B;
+    public Element C;
+    public Element K;
     public string elementSelected = "Hydrogen";
 
 
@@ -39,7 +41,7 @@ public class initializeScreen : MonoBehaviour
     public void chooseElement(string elementSelect)
     {
         elementSelect = selectElement.elementNames;
-        List<Element> elementList = new List<Element>{ Hydrogen, X, A };
+        List<Element> elementList = new List<Element>{ Hydrogen, X, A, C };
         foreach (Element elementObject in elementList)
         {
 
@@ -57,6 +59,10 @@ public class initializeScreen : MonoBehaviour
                 if (chosenElement.elementName == "A")
                 {
                     chosenElement2 = B;
+                }
+                if (chosenElement.elementName == "C")
+                {
+                    chosenElement2 = K;
                 }
 
             }
