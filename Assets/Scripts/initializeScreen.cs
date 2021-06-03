@@ -46,6 +46,10 @@ public class initializeScreen : MonoBehaviour
             if (elementSelect == elementObject.elementName)
             {
                 chosenElement = elementObject;
+                if (chosenElement.elementName == "Hydrogen")
+                {
+                    return;
+                }
                 if (chosenElement.elementName == "X")
                 {
                     chosenElement2 = Y;
@@ -63,6 +67,32 @@ public class initializeScreen : MonoBehaviour
 
     public void initScreen()
     {
+        if (chosenElement.elementName == "Hydrogen")
+        {
+            wellTitle1.text = "Hydrogen";
+            levels[4].transform.position = new Vector3(0.1899996f, 6.12f, 0);
+            levels[3].transform.position = new Vector3(0.1899996f, 5.7f, 0);
+            levels[2].transform.position = new Vector3(0.1899996f, 5f, 0);
+            levels[1].transform.position = new Vector3(0.1899996f, 4f, 0);
+            levels[0].transform.position = new Vector3(0.1899996f, -.48f, 0);
+
+            foreach (GameObject Line in Lines)
+            {
+                Line.transform.position = cam.WorldToScreenPoint(levels[Lines.IndexOf(Line)].transform.position + new Vector3(-1, 0, 0));
+                var biggestkj = chosenElement.kJValues.Last();
+                var newkj = biggestkj - chosenElement.kJValues[Lines.IndexOf(Line)];
+                Line.GetComponent<Text>().text = "-" + newkj + " kJ";
+
+            }
+            foreach (GameObject Line in NLines)
+            {
+
+                Line.transform.position = cam.WorldToScreenPoint(levels[NLines.IndexOf(Line)].transform.position + new Vector3(3.8f, 0, 0));
+
+            }
+
+            return;
+        }
         List<Material> colorsUsed = new List<Material>();
         wellTitle1.text = "Element " + chosenElement.elementName;
         wellTitle2.text = "Element " + chosenElement2.elementName;

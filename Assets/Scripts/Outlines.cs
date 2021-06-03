@@ -41,29 +41,31 @@ public class Outlines : MonoBehaviour
             }
 
         }
+        if (selectElement.elementNames != "Hydrogen") {
+            var EligibleLines2 = CardManager.GetComponent<CardThing>().wells[1].EligibleLines;
 
-        var EligibleLines2 = CardManager.GetComponent<CardThing>().wells[1].EligibleLines;
-
-        foreach (GameObject line in LineList2)
-        {
-            var index = LineList2.IndexOf(line);
-            var outline = OutlineList2[index];
-            outline.transform.position = new Vector3(line.transform.position.x, line.transform.position.y, line.transform.position.z + 0.5f);
-
-            if (EligibleLines2.Contains(line))
+            foreach (GameObject line in LineList2)
             {
-                outline.SetActive(true);
+                var index = LineList2.IndexOf(line);
+                var outline = OutlineList2[index];
+                outline.transform.position = new Vector3(line.transform.position.x, line.transform.position.y, line.transform.position.z + 0.5f);
+
+                if (EligibleLines2.Contains(line))
+                {
+                    outline.SetActive(true);
+                }
+
+                else
+                {
+                    outline.SetActive(false);
+                }
             }
 
-            else
+            /*if ((EligibleLines.Count == 0) && (EligibleLines2.Count == 0))
             {
-                outline.SetActive(false);
-            }
+                CardOutline.SetActive(true);
+            }*/
         }
-
-        /*if ((EligibleLines.Count == 0) && (EligibleLines2.Count == 0))
-        {
-            CardOutline.SetActive(true);
-        }*/
     }
+        
 }

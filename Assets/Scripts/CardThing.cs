@@ -24,6 +24,16 @@ public class CardThing : MonoBehaviour
 
     public AudioSource cardSound;
 
+    public Text tText1;
+    public Text tText2;
+    public Text tText3;
+    public Text tText4;
+    public Text tText5;
+    public Text tText6;
+    public Button menu;
+
+    public int tutorialCounter;
+
     [System.Serializable] public class aColor
     {
         public GameObject ColorObject;
@@ -54,6 +64,15 @@ public class CardThing : MonoBehaviour
     {
         kJDic = new Dictionary<GameObject, int>();
         LastCard = -1;
+        if (selectElement.elementNames == "Hydrogen")
+        {
+            tText3.gameObject.SetActive(false);
+            tText4.gameObject.SetActive(false);
+            tText5.gameObject.SetActive(false);
+            tText6.gameObject.SetActive(false);
+            menu.gameObject.SetActive(false);
+        }
+        
     }
 
     public void Update()
@@ -63,12 +82,27 @@ public class CardThing : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+            
+
             if (Physics.Raycast(ray, out hit, 1000))
             {
+                
                 foreach (Well well in wells)
                 {
                     if (well.EligibleLines.Contains(hit.collider.gameObject))
                     {
+                        if (tutorialCounter == 2)
+                        {
+                            tText5.gameObject.SetActive(false);
+                            tText6.gameObject.SetActive(true);
+                            menu.gameObject.SetActive(true);
+                        }
+                        if (tutorialCounter == 1)
+                        {
+                            tText4.gameObject.SetActive(true);
+                            tText2.gameObject.SetActive(true);
+                            tText3.gameObject.SetActive(false);
+                        }
                         well.electronparent.transform.position = new Vector3(hit.collider.gameObject.transform.position.x, hit.collider.gameObject.transform.position.y + .035f, hit.collider.gameObject.transform.position.z - 1);
                         well.CurrentLineNumber = well.levellist.IndexOf(hit.collider.gameObject);
                         foreach (Well wellz in wells)
@@ -116,6 +150,28 @@ public class CardThing : MonoBehaviour
 
     public void FlipFirstCard()
     {
+        
+        if (selectElement.elementNames == "Hydrogen")
+        {
+            if (tutorialCounter == 1)
+            {
+                tText2.gameObject.SetActive(false);
+                tText4.gameObject.SetActive(false);
+                tText5.gameObject.SetActive(true);
+                tutorialCounter += 1;
+            }
+            else
+            {
+                tText1.gameObject.SetActive(false);
+                tText2.gameObject.SetActive(false);
+                tText3.gameObject.SetActive(true);
+                tutorialCounter += 1;
+            }
+            
+            
+
+        }
+
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
 

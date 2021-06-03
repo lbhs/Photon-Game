@@ -17,4 +17,12 @@ public class selectElement : MonoBehaviour
         Debug.Log(elementNames);
         SceneManager.LoadScene(2);
     }
+
+    public void startTutorial()
+    {
+        SceneManager.LoadScene(4);
+        elementNames = "Hydrogen";
+        Debug.Log(elementNames);
+    }
+
 }
