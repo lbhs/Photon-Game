@@ -8,9 +8,6 @@ public class Element : MonoBehaviour
     // Defines Name of atom and the kJValues for the colorSet that the element emits
     public string elementName;
     public List<int> kJValues;
-  
-    
-
 
     // Defines the Element Object
     public Element(string Name, List<int> kJ)
@@ -19,8 +16,6 @@ public class Element : MonoBehaviour
         kJValues = kJ;
 
     }
-
-
 
 }
 

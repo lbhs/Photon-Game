@@ -7015,6 +7015,8 @@ MonoBehaviour:
   Y: {fileID: 0}
   A: {fileID: 0}
   B: {fileID: 0}
+  C: {fileID: 0}
+  K: {fileID: 0}
   elementSelected: 
 --- !u!4 &1830344515
 Transform:
