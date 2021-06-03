@@ -205,25 +205,6 @@ public class CardThing : MonoBehaviour
     /* This function is called when the player clicks on the button to flip a card. */
     public void FlipFirstCard()
     {
-        /* More tutorial stuff... */
-        if (selectElement.elementNames == "Hydrogen")
-        {
-            if (tutorialCounter == 1)
-            {
-                tText2.gameObject.SetActive(false);
-                tText4.gameObject.SetActive(false);
-                tText5.gameObject.SetActive(true);
-                tutorialCounter += 1;
-            }
-            else
-            {
-                tText1.gameObject.SetActive(false);
-                tText2.gameObject.SetActive(false);
-                tText3.gameObject.SetActive(true);
-                tutorialCounter += 1;
-            }
-        }
-
         /* Assigns the element of each well, this would be in the Start() function but if doesn't work in there. */
         wells[0].element = initScreen.chosenElement;
         wells[1].element = initScreen.chosenElement2;
@@ -231,6 +212,7 @@ public class CardThing : MonoBehaviour
         /* Creates the variable CardNumber, which is used to refer to the selected card by its index in the Cards list. */
         var CardNumber = -1;
 
+        /* More tutorial stuff... */
         /* Checks if we are in the turtorial. If not, it calls the function PickACard() in the AI script. The AI does its 
          * thing and then returns which card it has picked, which is assigned to CardNumber. If we are in turotial a card
          * is assigned based on what step in the tutorial the player is on. */
@@ -240,15 +222,34 @@ public class CardThing : MonoBehaviour
         }
         else
         {
-            if (tutorialCounter == 2)
+            if (tutorialCounter == 1)
             {
                 CardNumber = 4;
             }
-            if (tutorialCounter == 3)
+            if (tutorialCounter == 0)
             {
-                return;
+                CardNumber = ai.PickACard();
             }
         }
+
+        if (selectElement.elementNames == "Hydrogen")
+        {
+            if (tutorialCounter == 1)
+            {
+                tText2.gameObject.SetActive(false);
+                tText4.gameObject.SetActive(false);
+                tText5.gameObject.SetActive(true);
+                tutorialCounter += 1;
+            }
+            if (tutorialCounter == 0)
+            {
+                tText1.gameObject.SetActive(false);
+                tText2.gameObject.SetActive(false);
+                tText3.gameObject.SetActive(true);
+                tutorialCounter += 1;
+            }
+        }
+
 
         /* Calls the CheckLines() function to determine what the EligibleLines are based on the selected card. */
         foreach (Well well in wells)
